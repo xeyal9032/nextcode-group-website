@@ -1,0 +1,78 @@
+# NextCode FTP Ignore List
+# Bu dosyalardaki klasörler/dosyalar FTP'ye YÜKLENMEMELİ (Production gereksiz)
+
+# ============================================
+# DOCUMENTATION (Local'de kalmalı)
+# ============================================
+docs/
+*.md
+!README.md
+*.txt
+!robots.txt
+
+# ============================================
+# TEST FILES (Production'da gereksiz)
+# ============================================
+tests/
+*test*.php
+*check*.php
+*demo*.php
+mysql-client*.php
+
+# ============================================
+# DEVELOPMENT FILES
+# ============================================
+.git/
+.gitignore
+.env
+.env.example
+.vscode/
+.idea/
+*.log
+
+# ============================================
+# BACKUP FILES (Production'da gereksiz)
+# ============================================
+backup/
+*.backup
+*.bak
+*.old
+
+# ============================================
+# TEMPORARY FILES
+# ============================================
+temp/
+tmp/
+cache/*.cache
+*.tmp
+
+# ============================================
+# BUILD FILES
+# ============================================
+node_modules/
+vendor/
+composer.lock
+package-lock.json
+
+# ============================================
+# SCRIPTS & TOOLS (Local'de kalmalı)
+# ============================================
+tools/
+organize-project.ps1
+*.bat
+*.sh
+
+# ============================================
+# DATABASE SCRIPTS (Security - Production'da olmamalı)
+# ============================================
+database/*.sql
+veritabani-*.php
+veritabani-*.sql
+
+# ============================================
+# MONITORING & LOGS (Opsiyonel)
+# ============================================
+monitoring/logs/
+logs/*.log
+
+

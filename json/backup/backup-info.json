@@ -1,0 +1,55 @@
+{
+  "timestamp": "2025-09-08_18-52-19",
+  "date": "2025-09-08 18:52:19",
+  "project_name": "NextCode Group Web Projesi",
+  "version": "1.0.0",
+  "backup_type": "Full Backup",
+  "files_count": 0,
+  "size_mb": 0,
+  "include_database": true,
+  "compressed": false,
+  "backup_notes": "Tüm web projesi dosyalarının tam backup'ı",
+  "backup_created_by": "AI Assistant",
+  "backup_method": "PowerShell Script",
+  "directories_backed_up": [
+    "php",
+    "css", 
+    "js",
+    "config",
+    "database",
+    "images",
+    "admin",
+    "api",
+    "includes",
+    "documentation"
+  ],
+  "file_types_backed_up": [
+    "*.php",
+    "*.css",
+    "*.js",
+    "*.sql",
+    "*.md",
+    "*.txt",
+    "*.htaccess",
+    "*.jpg",
+    "*.png",
+    "*.svg"
+  ],
+  "critical_files": [
+    "index.php",
+    "config/database.php",
+    "config/security.php",
+    "includes/header.php",
+    "includes/footer.php",
+    "admin/index.php",
+    "api-router.php",
+    "router.php"
+  ],
+  "restore_instructions": [
+    "1. Backup klasörünü hedef dizine kopyalayın",
+    "2. Veritabanı bağlantı bilgilerini kontrol edin",
+    "3. Dosya izinlerini ayarlayın",
+    "4. Web sunucusunu yeniden başlatın",
+    "5. Site erişimini test edin"
+  ]
+}

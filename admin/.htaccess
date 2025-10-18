@@ -1,0 +1,33 @@
+# Admin Panel .htaccess - NextCode Group
+
+# Error handling
+ErrorDocument 404 /admin/404.php
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# PHP settings
+<IfModule mod_php.c>
+    php_flag display_errors Off
+    php_flag log_errors On
+    php_value error_log logs/admin_errors.log
+</IfModule>
+
+# Directory browsing
+Options -Indexes
+
+# File access
+<Files "*.log">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Allow PHP files
+<FilesMatch "\.php$">
+    Order allow,deny
+    Allow from all
+</FilesMatch>

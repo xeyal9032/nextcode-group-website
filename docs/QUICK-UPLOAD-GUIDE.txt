@@ -1,0 +1,59 @@
+═══════════════════════════════════════════════════════
+  GOOGLE ANALYTICS - ACIL UPLOAD TALİMATI
+═══════════════════════════════════════════════════════
+
+✅ Google Analytics kodu hazır!
+⚠️ FTP ile upload etmeniz gerekiyor!
+
+═══════════════════════════════════════════════════════
+  FTP BİLGİLERİ
+═══════════════════════════════════════════════════════
+
+Host:     gtorg.ftp.tools
+Username: gtorg_nextcode
+Password: JDH6h9T2zb8UC47t@rn56@
+Client:   CuteFTP 9
+
+═══════════════════════════════════════════════════════
+  UPLOAD EDİLECEK DOSYA (Sadece 1 dosya!)
+═══════════════════════════════════════════════════════
+
+Local Path:  C:\Users\xeyal\Desktop\nextcode\includes\header.php
+Server Path: includes/header.php
+
+═══════════════════════════════════════════════════════
+  ADIMLAR
+═══════════════════════════════════════════════════════
+
+1. CuteFTP 9 aç
+2. FTP bağlantısı kur (yukardaki bilgiler)
+3. Sunucuda "includes" klasörüne git
+4. header.php dosyasını sürükle-bırak (overwrite: YES)
+5. Upload tamamlandıktan sonra browser cache temizle
+6. https://nextcode.az sayfasını aç (Ctrl + F5)
+
+═══════════════════════════════════════════════════════
+  TEST
+═══════════════════════════════════════════════════════
+
+Upload'dan sonra F12 > Console:
+
+Görmelisiniz:
+✅ Google Analytics 4 initialized - ID: G-8FYSTD1FVH
+
+═══════════════════════════════════════════════════════
+  REAL-TIME TEST
+═══════════════════════════════════════════════════════
+
+1. https://analytics.google.com/analytics/web/#/realtime
+2. 1-2 dakika bekle
+3. Kendinizi real-time'da gör ✅
+
+═══════════════════════════════════════════════════════
+
+SADECE 1 DOSYA UPLOAD ET: includes/header.php
+SONRA TEST ET: https://nextcode.az/analytics-verification.html
+
+═══════════════════════════════════════════════════════
+
+

@@ -1,0 +1,142 @@
+name: Scheduled Tasks
+
+on:
+  schedule:
+    # Her gün saat 02:00'de çalış (UTC)
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  database-backup:
+    name: Database Backup
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup MySQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mysql-client
+      
+      - name: Create database backup
+        run: |
+          mysqldump -h ${{ secrets.DB_HOST }} \
+                    -u ${{ secrets.DB_USER }} \
+                    -p${{ secrets.DB_PASSWORD }} \
+                    ${{ secrets.DB_NAME }} \
+                    > backup-$(date +%Y%m%d_%H%M%S).sql
+      
+      - name: Upload backup to S3
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      
+      - name: Copy backup to S3
+        run: |
+          aws s3 cp backup-*.sql s3://${{ secrets.S3_BACKUP_BUCKET }}/database-backups/
+      
+      - name: Notify backup success
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          text: '✅ Daily database backup completed successfully'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+
+  dependency-updates:
+    name: Check for Dependency Updates
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer:v2
+      
+      - name: Check for Composer updates
+        run: |
+          composer outdated --direct > composer-updates.txt || true
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Check for npm updates
+        run: |
+          npm outdated > npm-updates.txt || true
+      
+      - name: Create issue for updates
+        uses: peter-evans/create-issue-from-file@v4
+        with:
+          title: 'Dependency Updates Available'
+          content-filepath: |
+            composer-updates.txt
+            npm-updates.txt
+          labels: dependencies, maintenance
+
+  security-audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer:v2
+      
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+      
+      - name: Run security audit
+        run: composer security
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install npm dependencies
+        run: npm ci
+      
+      - name: Run npm audit
+        run: npm audit --production
+      
+      - name: Notify if vulnerabilities found
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          text: '⚠️ Security vulnerabilities detected! Please review and update dependencies.'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+
+  performance-test:
+    name: Performance Testing
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          urls: |
+            https://nextcode.az
+            https://nextcode.az/about.php
+            https://nextcode.az/services.php
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+

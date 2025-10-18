@@ -1,0 +1,27 @@
+# Simple .htaccess for testing
+RewriteEngine On
+
+# HTTPS Redirect - More robust version
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{HTTP:X-Forwarded-Ssl} !on
+RewriteCond %{SERVER_PORT} !443
+RewriteCond %{REQUEST_URI} !^/images/
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Remove .php extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Allow access to images - must be before other rules
+RewriteRule ^images/.*$ - [L]
+
+# Skip PHP processing for images
+<FilesMatch "\.(jpg|jpeg|png|gif|svg|ico|webp)$">
+    SetHandler default-handler
+</FilesMatch>
+
+# Error pages
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php

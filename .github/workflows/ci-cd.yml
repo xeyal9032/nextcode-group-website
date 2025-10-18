@@ -1,0 +1,316 @@
+name: NextCode Group CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+env:
+  PHP_VERSION: '8.2'
+  NODE_VERSION: '18'
+  MYSQL_ROOT_PASSWORD: 'root'
+  MYSQL_DATABASE: 'nextcode_test'
+  MYSQL_USER: 'test_user'
+  MYSQL_PASSWORD: 'test_password'
+
+jobs:
+  # Code Quality Checks
+  code-quality:
+    name: Code Quality & Security
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ env.PHP_VERSION }}
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, gd
+        coverage: xdebug
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        
+    - name: Install Composer dependencies
+      run: composer install --no-progress --prefer-dist --optimize-autoloader
+      
+    - name: Install NPM dependencies
+      run: npm ci
+      
+    - name: Run PHP CodeSniffer
+      run: |
+        composer global require squizlabs/php_codesniffer
+        ./vendor/bin/phpcs --standard=PSR12 --extensions=php --ignore=*/vendor/*,*/node_modules/* .
+        
+    - name: Run PHPStan Static Analysis
+      run: |
+        composer require --dev phpstan/phpstan
+        ./vendor/bin/phpstan analyse --level=8 --no-progress
+        
+    - name: Run Security Checker
+      run: |
+        composer require --dev enlightn/security-checker
+        ./vendor/bin/security-checker security:check
+        
+    - name: Run ESLint
+      run: npm run lint
+      
+    - name: Run CSS Lint
+      run: npm run csslint
+
+  # Unit Tests
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ env.MYSQL_ROOT_PASSWORD }}
+          MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
+          MYSQL_USER: ${{ env.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ env.MYSQL_PASSWORD }}
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ env.PHP_VERSION }}
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, gd
+        coverage: xdebug
+        
+    - name: Install Composer dependencies
+      run: composer install --no-progress --prefer-dist --optimize-autoloader
+      
+    - name: Wait for MySQL
+      run: |
+        while ! mysqladmin ping -h 127.0.0.1 -u ${{ env.MYSQL_USER }} -p${{ env.MYSQL_PASSWORD }} --silent; do
+          echo "Waiting for MySQL..."
+          sleep 2
+        done
+        
+    - name: Setup test database
+      run: |
+        mysql -h 127.0.0.1 -u ${{ env.MYSQL_USER }} -p${{ env.MYSQL_PASSWORD }} ${{ env.MYSQL_DATABASE }} < database/create_tables.sql
+        
+    - name: Run PHPUnit tests
+      run: ./vendor/bin/phpunit --coverage-clover=coverage.xml
+      env:
+        DB_HOST: 127.0.0.1
+        DB_NAME: ${{ env.MYSQL_DATABASE }}
+        DB_USER: ${{ env.MYSQL_USER }}
+        DB_PASS: ${{ env.MYSQL_PASSWORD }}
+        
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+
+  # Integration Tests
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: [code-quality, unit-tests]
+    
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ env.MYSQL_ROOT_PASSWORD }}
+          MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
+          MYSQL_USER: ${{ env.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ env.MYSQL_PASSWORD }}
+        ports:
+          - 3306:3306
+        
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ env.PHP_VERSION }}
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, gd
+        
+    - name: Install Composer dependencies
+      run: composer install --no-progress --prefer-dist --optimize-autoloader
+      
+    - name: Setup test environment
+      run: |
+        cp .env.example .env.test
+        echo "DB_HOST=127.0.0.1" >> .env.test
+        echo "DB_NAME=${{ env.MYSQL_DATABASE }}" >> .env.test
+        echo "DB_USER=${{ env.MYSQL_USER }}" >> .env.test
+        echo "DB_PASS=${{ env.MYSQL_PASSWORD }}" >> .env.test
+        
+    - name: Run integration tests
+      run: ./vendor/bin/phpunit tests/Integration/
+      env:
+        DB_HOST: 127.0.0.1
+        DB_NAME: ${{ env.MYSQL_DATABASE }}
+        DB_USER: ${{ env.MYSQL_USER }}
+        DB_PASS: ${{ env.MYSQL_PASSWORD }}
+
+  # Build Docker Image
+  build-docker:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    needs: [code-quality, unit-tests, integration-tests]
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: |
+          nextcodegroup/web:latest
+          nextcodegroup/web:${{ github.sha }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+  # Deploy to Staging
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [build-docker]
+    if: github.ref == 'refs/heads/develop'
+    environment: staging
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Deploy to staging server
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.STAGING_HOST }}
+        username: ${{ secrets.STAGING_USER }}
+        key: ${{ secrets.STAGING_SSH_KEY }}
+        script: |
+          cd /var/www/nextcode-staging
+          docker-compose pull
+          docker-compose up -d
+          docker system prune -f
+
+  # Deploy to Production
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [build-docker]
+    if: github.ref == 'refs/heads/main'
+    environment: production
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Create backup
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.PROD_HOST }}
+        username: ${{ secrets.PROD_USER }}
+        key: ${{ secrets.PROD_SSH_KEY }}
+        script: |
+          cd /var/www/nextcode-production
+          docker-compose exec mysql mysqldump -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} nextcode_prod > backup/$(date +%Y%m%d_%H%M%S)_backup.sql
+          
+    - name: Deploy to production server
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.PROD_HOST }}
+        username: ${{ secrets.PROD_USER }}
+        key: ${{ secrets.PROD_SSH_KEY }}
+        script: |
+          cd /var/www/nextcode-production
+          docker-compose pull
+          docker-compose up -d --no-deps web
+          docker-compose restart nginx
+          docker system prune -f
+          
+    - name: Health check
+      run: |
+        sleep 30
+        curl -f https://nextcodegroup.com/health || exit 1
+        
+    - name: Notify deployment
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        channel: '#deployments'
+        webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+      if: always()
+
+  # Security Scan
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'trivy-results.sarif'
+
+  # Performance Tests
+  performance-tests:
+    name: Performance Tests
+    runs-on: ubuntu-latest
+    needs: [deploy-staging]
+    if: github.ref == 'refs/heads/develop'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Run Lighthouse CI
+      uses: treosh/lighthouse-ci-action@v10
+      with:
+        urls: |
+          https://staging.nextcodegroup.com
+          https://staging.nextcodegroup.com/blog
+          https://staging.nextcodegroup.com/portfolio
+        configPath: './json/config/lighthouserc.json'
+        uploadArtifacts: true
+        temporaryPublicStorage: true

@@ -1,0 +1,179 @@
+/**
+ * Readability Enhancements
+ * Okunabilirlik ve erişilebilirlik iyileştirmeleri
+ */
+
+/* Better text rendering */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Improved line height for readability */
+p, li, td {
+    line-height: 1.7;
+}
+
+/* Better contrast for links */
+a {
+    text-decoration-skip-ink: auto;
+}
+
+a:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Skip to main content link */
+.skip-to-main {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+}
+
+.skip-to-main:focus {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: #667eea;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Better heading hierarchy */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.3;
+}
+
+/* Improved list spacing */
+ul, ol {
+    margin: 1em 0;
+    padding-left: 1.5em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Better table readability */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+    font-weight: 600;
+    background: #f9fafb;
+}
+
+/* Code blocks readability */
+code {
+    font-family: 'Courier New', Consolas, Monaco, monospace;
+    background: #f3f4f6;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+pre {
+    background: #1f2937;
+    color: #f3f4f6;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+pre code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* Accessible form elements */
+input, textarea, select {
+    font-family: inherit;
+    font-size: 100%;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Better button accessibility */
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    body {
+        color: #000;
+        background: #fff;
+    }
+    
+    a {
+        color: #0000EE;
+        text-decoration: underline;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        color: #000;
+        background: #fff;
+    }
+    
+    a {
+        text-decoration: underline;
+    }
+    
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+    
+    .no-print {
+        display: none !important;
+    }
+}
+
+

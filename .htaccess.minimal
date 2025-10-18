@@ -1,0 +1,26 @@
+# Minimal .htaccess - No redirects
+RewriteEngine On
+
+# Allow direct access to images
+RewriteRule ^images/.*$ - [L]
+
+# Remove .php extension only for non-image files
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^/images/
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Error pages
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+
+
+
+
+
+
+
+
+
+
+

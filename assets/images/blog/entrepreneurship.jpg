@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="entrepreneurBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#entrepreneurBg)"/>
+  <polygon points="400,80 420,120 460,120 430,150 440,190 400,170 360,190 370,150 340,120 380,120" fill="#ffffff" opacity="0.9"/>
+  <rect x="200" y="250" width="400" height="100" rx="10" fill="#ffffff" opacity="0.8"/>
+  <rect x="220" y="270" width="60" height="60" rx="5" fill="#f093fb"/>
+  <rect x="300" y="270" width="60" height="60" rx="5" fill="#f5576c"/>
+  <rect x="380" y="270" width="60" height="60" rx="5" fill="#ff6b6b"/>
+  <rect x="460" y="270" width="60" height="60" rx="5" fill="#4ecdc4"/>
+  <circle cx="150" cy="100" r="25" fill="#ffffff" opacity="0.3"/>
+  <circle cx="650" cy="320" r="30" fill="#ffffff" opacity="0.2"/>
+  <text x="400" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#ffffff">Entrepreneurship</text>
+  <text x="400" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#ffffff">Digital Age Innovation</text>
+</svg>

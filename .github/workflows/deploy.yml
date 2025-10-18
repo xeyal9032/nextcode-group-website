@@ -1,0 +1,161 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+
+jobs:
+  deploy:
+    name: Deploy Application
+    runs-on: ubuntu-latest
+    environment: 
+      name: ${{ github.event.inputs.environment || 'production' }}
+      url: https://nextcode.az
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, xml, ctype, json, pdo, pdo_mysql
+          tools: composer:v2
+      
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install Node dependencies and build
+        run: |
+          npm ci
+          npm run build
+      
+      - name: Create deployment package
+        run: |
+          mkdir -p deployment
+          rsync -av --exclude='node_modules' --exclude='.git' --exclude='tests' --exclude='.github' . deployment/
+      
+      - name: Deploy to server via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./deployment/
+          server-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/tests/**
+            **/.env
+      
+      - name: Clear application cache (via SSH)
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/html
+            php artisan cache:clear || true
+            php artisan config:clear || true
+            php artisan route:clear || true
+      
+      - name: Notify deployment success
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          text: '✅ Deployment to ${{ github.event.inputs.environment || 'production' }} successful!'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+      
+      - name: Notify deployment failure
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          text: '❌ Deployment to ${{ github.event.inputs.environment || 'production' }} failed!'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+      
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+  health-check:
+    name: Post-Deployment Health Check
+    runs-on: ubuntu-latest
+    needs: deploy
+    
+    steps:
+      - name: Wait for deployment to settle
+        run: sleep 30
+      
+      - name: Check website availability
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://nextcode.az)
+          if [ $response -ne 200 ]; then
+            echo "❌ Website returned status code: $response"
+            exit 1
+          fi
+          echo "✅ Website is available (HTTP 200)"
+      
+      - name: Check API endpoints
+        run: |
+          endpoints=(
+            "https://nextcode.az/api/blog.php"
+            "https://nextcode.az/api/portfolio.php?action=get_projects"
+            "https://nextcode.az/api/services.php"
+          )
+          
+          for endpoint in "${endpoints[@]}"; do
+            response=$(curl -s -o /dev/null -w "%{http_code}" "$endpoint")
+            if [ $response -ne 200 ]; then
+              echo "❌ API endpoint failed: $endpoint (Status: $response)"
+              exit 1
+            fi
+            echo "✅ API endpoint OK: $endpoint"
+          done
+      
+      - name: Notify health check success
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          text: '✅ Post-deployment health checks passed!'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+      
+      - name: Notify health check failure
+        if: failure()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          text: '❌ Post-deployment health checks failed! Immediate attention required!'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+

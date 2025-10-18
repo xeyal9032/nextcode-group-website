@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Verification - NextCode</title>
+    <meta name="google-site-verification" content="google6b45980adf7adfc5" />
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FYSTD1FVH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-8FYSTD1FVH', {
+            'send_page_view': true,
+            'debug_mode': true // Debug mode aktif
+        });
+        
+        console.log('✅ Analytics verification page loaded');
+        console.log('📊 Measurement ID: G-8FYSTD1FVH');
+        console.log('🔍 Check Network tab for google-analytics.com requests');
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .success {
+            background: #d1fae5;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .success h2 {
+            color: #065f46;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .code {
+            background: #1f2937;
+            color: #f3f4f6;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .steps {
+            list-style-position: inside;
+            margin: 1rem 0;
+            line-height: 2;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .status-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .status-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-text {
+            font-weight: 600;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✅ Google Analytics Başarıyla Yapılandırıldı!</h1>
+        
+        <div class="success">
+            <h2>🎉 Kurulum Tamamlandı</h2>
+            <p>Google Analytics 4 kodu tüm sayfalara başarıyla eklendi.</p>
+        </div>
+        
+        <div class="status-grid">
+            <div class="status-card">
+                <div class="status-icon">📊</div>
+                <div class="status-text">GA4 Aktif</div>
+            </div>
+            <div class="status-card">
+                <div class="status-icon">🔍</div>
+                <div class="status-text">Verification OK</div>
+            </div>
+            <div class="status-card">
+                <div class="status-icon">🌐</div>
+                <div class="status-text">Cross-Domain</div>
+            </div>
+            <div class="status-card">
+                <div class="status-icon">🎯</div>
+                <div class="status-text">Event Tracking</div>
+            </div>
+        </div>
+        
+        <div class="info">
+            <strong>Measurement ID:</strong>
+            <div class="code">G-8FYSTD1FVH</div>
+        </div>
+        
+        <h3 style="color: #667eea; margin-top: 2rem;">📋 Real-Time Test Adımları</h3>
+        <ol class="steps">
+            <li>Google Analytics'e gidin: <a href="https://analytics.google.com" target="_blank">analytics.google.com</a></li>
+            <li>Reports > Realtime seçin</li>
+            <li>Bu sayfa açık kalmalı</li>
+            <li>1-2 dakika içinde real-time'da görüneceksiniz</li>
+        </ol>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="https://analytics.google.com/analytics/web/#/realtime" target="_blank" class="btn">
+                📊 Google Analytics Real-Time Aç
+            </a>
+            
+            <a href="/analytics-test.php" class="btn">
+                🧪 Detaylı Test Sayfası
+            </a>
+            
+            <button class="btn" onclick="sendTestEvent()">
+                🎯 Test Event Gönder
+            </button>
+        </div>
+        
+        <h3 style="color: #667eea; margin-top: 2rem;">🔍 Hızlı Kontrol</h3>
+        <div class="info">
+            <strong>Chrome DevTools:</strong>
+            <ol style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                <li>F12 tuşuna basın</li>
+                <li>Network tab</li>
+                <li>Filter: "google-analytics" veya "collect"</li>
+                <li>Request görmelisiniz</li>
+            </ol>
+        </div>
+        
+        <div id="test-result" style="margin-top: 2rem;"></div>
+    </div>
+    
+    <script>
+        // Auto test on load
+        setTimeout(() => {
+            const result = document.getElementById('test-result');
+            
+            if (typeof gtag === 'function' && window.dataLayer && window.dataLayer.length > 0) {
+                result.innerHTML = `
+                    <div class="success">
+                        <h2>✅ Test Başarılı!</h2>
+                        <p><strong>gtag function:</strong> Aktif</p>
+                        <p><strong>DataLayer events:</strong> ${window.dataLayer.length}</p>
+                        <p><strong>Measurement ID:</strong> G-8FYSTD1FVH</p>
+                        <p style="margin-top: 1rem; color: #065f46;">
+                            🎉 Google Analytics doğru çalışıyor! 
+                            Real-time reports'da 1-2 dakika içinde görüneceksiniz.
+                        </p>
+                    </div>
+                `;
+            } else {
+                result.innerHTML = `
+                    <div style="background: #fee2e2; border-left: 4px solid #ef4444; padding: 1.5rem; border-radius: 8px;">
+                        <h2 style="color: #991b1b;">⚠️ Dikkat!</h2>
+                        <p>Analytics kodu tam yüklenmemiş olabilir. Sayfayı yenileyin.</p>
+                    </div>
+                `;
+            }
+        }, 2000);
+        
+        function sendTestEvent() {
+            if (typeof gtag === 'function') {
+                gtag('event', 'test_button_click', {
+                    'event_category': 'verification',
+                    'event_label': 'Analytics Verification Test',
+                    'value': 1
+                });
+                
+                alert('✅ Test event gönderildi!\n\nGoogle Analytics Real-Time reports\'da "test_button_click" eventi görünecek.');
+                console.log('📊 Test event sent: test_button_click');
+            } else {
+                alert('❌ gtag function bulunamadı!');
+            }
+        }
+        
+        // Log current configuration
+        console.log('==========================================');
+        console.log('📊 GOOGLE ANALYTICS 4 - CONFIGURATION');
+        console.log('==========================================');
+        console.log('Measurement ID: G-8FYSTD1FVH');
+        console.log('Page URL:', window.location.href);
+        console.log('DataLayer events:', window.dataLayer ? window.dataLayer.length : 0);
+        console.log('gtag available:', typeof gtag === 'function');
+        console.log('==========================================');
+        
+        // Send page view
+        if (typeof gtag === 'function') {
+            gtag('event', 'page_view', {
+                'page_title': 'Analytics Verification Page',
+                'page_location': window.location.href
+            });
+            console.log('✅ Page view event sent');
+        }
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,87 @@
+====================================================
+NextCode - FTP Yükleme (BASIT VERSIYON)
+====================================================
+
+FTP Bilgileri:
+Host: gtorg.ftp.tools
+User: gtorg_nextcode
+Pass: JDH6h9T2zb8UC47t@rn56@
+
+====================================================
+SADECE BU 11 DOSYAYI YÜKLE
+====================================================
+
+SIRA ÖNEMLİ! Bu sırayla yükle:
+
+1. config/auto-migration.php        (YENİ - önce bu)
+2. config/database.php              (GÜNCELLE)
+3. includes/header.php              (GÜNCELLE)
+4. includes/content_helper.php      (GÜNCELLE)
+5. js/console-guard.js              (YENİ)
+6. api/contact.php                  (GÜNCELLE)
+7. contact.php                      (GÜNCELLE)
+8. index.php                        (GÜNCELLE)
+9. admin/login.php                  (GÜNCELLE)
+10. admin/database-migration.php    (YENİ)
+11. cron/auto-migration.php         (YENİ - opsiyonel)
+
+Not: cron/ klasörü yoksa önce oluştur
+
+====================================================
+DİĞER HER ŞEYİ OLDUĞU GİBİ BIRAK!
+====================================================
+
+FTP'de mevcut olan dosyalara DOKUNMA:
+✓ Diğer PHP sayfaları
+✓ admin/ klasöründeki diğer dosyalar
+✓ api/ klasöründeki diğer dosyalar
+✓ assets/, css/, images/, js/ klasörleri
+✓ vendor/, cache/ klasörleri
+
+====================================================
+YÜKLEME SONRASI TEST
+====================================================
+
+1. https://nextcode.az
+   → Site açılıyor mu?
+
+2. https://nextcode.az/contact.php
+   → Form çalışıyor mu?
+
+3. F12 → Console
+   → "Console logs disabled" var mı?
+
+4. https://nextcode.az/admin/database-migration.php
+   → Admin panel açılıyor mu?
+   → Tüm sütunlar ✅ VAR mı?
+
+====================================================
+SORUN OLURSA (Rollback)
+====================================================
+
+FTP'de:
+1. Yeni dosyaları sil:
+   - config/auto-migration.php
+   - admin/database-migration.php
+   - js/console-guard.js
+   - cron/auto-migration.php
+
+2. Backup'ları geri yükle:
+   - contact.php.backup-2025-10-12 → contact.php
+   - database.php.backup-2025-10-12 → database.php
+
+3. Site test et
+
+====================================================
+ÖZET
+====================================================
+
+Yüklenecek: 11 dosya
+Süre: 10-15 dakika
+Risk: Düşük
+Test: Gerekli
+
+Başarı Tahmini: %95
+
+====================================================
+

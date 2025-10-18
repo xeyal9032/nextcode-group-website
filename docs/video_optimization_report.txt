@@ -1,0 +1,13 @@
+=== VIDEO OPTİMİZASYON RAPORU ===
+
+Video: Видео WhatsApp 2025-10-04 в 15.31.15_0010b383.mp4
+  Boyut: 7.53 MB
+  Format: mp4
+  MIME: video/mp4
+  Öneriler:
+    - Video için poster image ekleyin
+    - Lazy loading kullanın
+    - CDN kullanmayı düşünün
+
+Toplam Boyut: 7.53 MB
+Optimize Edilebilir: 1

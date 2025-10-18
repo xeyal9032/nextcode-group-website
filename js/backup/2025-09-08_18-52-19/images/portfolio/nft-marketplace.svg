@@ -1,0 +1,179 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="nftGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a8edea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fed6e3;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffecd2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fcb69f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#84fab0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8fd3f4;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="ethGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#627eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3c4cdd;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glowEffect" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#nftGradient)" rx="20"/>
+  
+  <!-- Header -->
+  <g transform="translate(50, 20)">
+    <rect x="0" y="0" width="300" height="35" fill="white" opacity="0.1" rx="8"/>
+    <text x="150" y="23" text-anchor="middle" fill="white" font-size="16" font-weight="bold">NFT Marketplace</text>
+    <circle cx="20" cy="17" r="8" fill="url(#ethGradient)"/>
+    <text x="20" y="21" text-anchor="middle" fill="white" font-size="8" font-weight="bold">Ξ</text>
+  </g>
+  
+  <!-- NFT Card 1 - Digital Art -->
+  <g transform="translate(30, 70)">
+    <rect x="0" y="0" width="100" height="140" fill="white" opacity="0.95" rx="12"/>
+    <rect x="5" y="5" width="90" height="90" fill="url(#cardGradient1)" rx="8"/>
+    
+    <!-- Art Content -->
+    <circle cx="50" cy="35" r="15" fill="white" opacity="0.8"/>
+    <circle cx="50" cy="35" r="10" fill="url(#glowEffect)"/>
+    <polygon points="45,30 55,30 60,40 55,50 45,50 40,40" fill="#667eea" opacity="0.8"/>
+    <circle cx="35" cy="60" r="8" fill="white" opacity="0.6"/>
+    <circle cx="65" cy="60" r="6" fill="white" opacity="0.6"/>
+    <rect x="40" y="70" width="20" height="3" fill="white" opacity="0.7" rx="1"/>
+    
+    <text x="50" y="110" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Cosmic Dreams #1</text>
+    <text x="50" y="122" text-anchor="middle" fill="#666" font-size="9">Digital Art</text>
+    
+    <!-- Price and ETH -->
+    <rect x="10" y="125" width="35" height="12" fill="url(#ethGradient)" rx="6"/>
+    <text x="27" y="133" text-anchor="middle" fill="white" font-size="8" font-weight="bold">2.5 ETH</text>
+    
+    <!-- Heart Icon -->
+    <path d="M75 128 C75 125, 78 125, 80 128 C82 125, 85 125, 85 128 C85 132, 80 135, 80 135 C80 135, 75 132, 75 128 Z" fill="#ef4444"/>
+    <text x="88" y="133" fill="#666" font-size="8">24</text>
+  </g>
+  
+  <!-- NFT Card 2 - 3D Model -->
+  <g transform="translate(150, 70)">
+    <rect x="0" y="0" width="100" height="140" fill="white" opacity="0.95" rx="12"/>
+    <rect x="5" y="5" width="90" height="90" fill="url(#cardGradient2)" rx="8"/>
+    
+    <!-- 3D Content -->
+    <rect x="35" y="25" width="30" height="30" fill="white" opacity="0.8" rx="4"/>
+    <rect x="40" y="30" width="20" height="20" fill="url(#glowEffect)" rx="2"/>
+    <polygon points="45,35 55,35 60,45 50,55 40,45" fill="#fcb69f" opacity="0.8"/>
+    <circle cx="30" cy="70" r="5" fill="white" opacity="0.6"/>
+    <circle cx="70" cy="70" r="7" fill="white" opacity="0.6"/>
+    <rect x="42" y="75" width="16" height="2" fill="white" opacity="0.7" rx="1"/>
+    
+    <text x="50" y="110" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Cyber Cube #42</text>
+    <text x="50" y="122" text-anchor="middle" fill="#666" font-size="9">3D Model</text>
+    
+    <!-- Price and ETH -->
+    <rect x="10" y="125" width="35" height="12" fill="url(#ethGradient)" rx="6"/>
+    <text x="27" y="133" text-anchor="middle" fill="white" font-size="8" font-weight="bold">1.8 ETH</text>
+    
+    <!-- Heart Icon -->
+    <path d="M75 128 C75 125, 78 125, 80 128 C82 125, 85 125, 85 128 C85 132, 80 135, 80 135 C80 135, 75 132, 75 128 Z" fill="#ef4444"/>
+    <text x="88" y="133" fill="#666" font-size="8">18</text>
+  </g>
+  
+  <!-- NFT Card 3 - Generative Art -->
+  <g transform="translate(270, 70)">
+    <rect x="0" y="0" width="100" height="140" fill="white" opacity="0.95" rx="12"/>
+    <rect x="5" y="5" width="90" height="90" fill="url(#cardGradient3)" rx="8"/>
+    
+    <!-- Generative Content -->
+    <rect x="20" y="20" width="60" height="60" fill="white" opacity="0.2" rx="6"/>
+    <circle cx="35" cy="35" r="8" fill="#84fab0" opacity="0.8"/>
+    <circle cx="65" cy="35" r="6" fill="#8fd3f4" opacity="0.8"/>
+    <circle cx="35" cy="65" r="6" fill="#8fd3f4" opacity="0.8"/>
+    <circle cx="65" cy="65" r="8" fill="#84fab0" opacity="0.8"/>
+    <circle cx="50" cy="50" r="10" fill="white" opacity="0.9"/>
+    <circle cx="50" cy="50" r="5" fill="url(#glowEffect)"/>
+    
+    <text x="50" y="110" text-anchor="middle" fill="#333" font-size="11" font-weight="bold">Genesis #777</text>
+    <text x="50" y="122" text-anchor="middle" fill="#666" font-size="9">Generative</text>
+    
+    <!-- Price and ETH -->
+    <rect x="10" y="125" width="35" height="12" fill="url(#ethGradient)" rx="6"/>
+    <text x="27" y="133" text-anchor="middle" fill="white" font-size="8" font-weight="bold">3.2 ETH</text>
+    
+    <!-- Heart Icon -->
+    <path d="M75 128 C75 125, 78 125, 80 128 C82 125, 85 125, 85 128 C85 132, 80 135, 80 135 C80 135, 75 132, 75 128 Z" fill="#ef4444"/>
+    <text x="88" y="133" fill="#666" font-size="8">31</text>
+  </g>
+  
+  <!-- Stats Section -->
+  <g transform="translate(30, 230)">
+    <rect x="0" y="0" width="340" height="40" fill="white" opacity="0.1" rx="8"/>
+    
+    <!-- Volume -->
+    <text x="20" y="15" fill="white" font-size="10" font-weight="bold">24h Volume</text>
+    <text x="20" y="28" fill="white" font-size="14" font-weight="bold">1,247 ETH</text>
+    <text x="20" y="38" fill="#22c55e" font-size="9">+12.5%</text>
+    
+    <!-- Floor Price -->
+    <text x="120" y="15" fill="white" font-size="10" font-weight="bold">Floor Price</text>
+    <text x="120" y="28" fill="white" font-size="14" font-weight="bold">0.85 ETH</text>
+    <text x="120" y="38" fill="#22c55e" font-size="9">+5.2%</text>
+    
+    <!-- Total Sales -->
+    <text x="220" y="15" fill="white" font-size="10" font-weight="bold">Total Sales</text>
+    <text x="220" y="28" fill="white" font-size="14" font-weight="bold">8,432</text>
+    <text x="220" y="38" fill="#22c55e" font-size="9">+8.1%</text>
+    
+    <!-- Owners -->
+    <text x="300" y="15" fill="white" font-size="10" font-weight="bold">Owners</text>
+    <text x="300" y="28" fill="white" font-size="14" font-weight="bold">2,156</text>
+    <text x="300" y="38" fill="#22c55e" font-size="9">+3.7%</text>
+  </g>
+  
+  <!-- Blockchain Icons -->
+  <g transform="translate(350, 30)">
+    <circle cx="0" cy="0" r="12" fill="url(#ethGradient)"/>
+    <text x="0" y="4" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Ξ</text>
+    <text x="0" y="20" text-anchor="middle" fill="white" font-size="8">Ethereum</text>
+  </g>
+  
+  <!-- Trending Badge -->
+  <g transform="translate(20, 80)">
+    <rect x="0" y="0" width="40" height="15" fill="#ef4444" rx="7"/>
+    <text x="20" y="10" text-anchor="middle" fill="white" font-size="8" font-weight="bold">🔥 HOT</text>
+  </g>
+  
+  <!-- New Badge -->
+  <g transform="translate(140, 80)">
+    <rect x="0" y="0" width="30" height="15" fill="#22c55e" rx="7"/>
+    <text x="15" y="10" text-anchor="middle" fill="white" font-size="8" font-weight="bold">NEW</text>
+  </g>
+  
+  <!-- Rare Badge -->
+  <g transform="translate(260, 80)">
+    <rect x="0" y="0" width="35" height="15" fill="#8b5cf6" rx="7"/>
+    <text x="17" y="10" text-anchor="middle" fill="white" font-size="8" font-weight="bold">RARE</text>
+  </g>
+  
+  <!-- Floating Elements -->
+  <g transform="translate(380, 120)">
+    <circle cx="0" cy="0" r="8" fill="white" opacity="0.1"/>
+    <text x="0" y="3" text-anchor="middle" fill="white" font-size="8">💎</text>
+  </g>
+  
+  <g transform="translate(10, 180)">
+    <circle cx="0" cy="0" r="6" fill="white" opacity="0.1"/>
+    <text x="0" y="2" text-anchor="middle" fill="white" font-size="6">🎨</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="200" y="285" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Decentralized NFT Marketplace</text>
+</svg>

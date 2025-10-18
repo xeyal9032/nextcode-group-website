@@ -1,0 +1,116 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="marketGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="shopGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffecd2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fcb69f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a8edea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fed6e3;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#marketGradient)" rx="20"/>
+  
+  <!-- Storefront -->
+  <g transform="translate(50, 60)">
+    <rect x="0" y="0" width="80" height="60" fill="url(#shopGradient)" rx="8"/>
+    <rect x="10" y="10" width="60" height="30" fill="white" opacity="0.8" rx="4"/>
+    <rect x="15" y="15" width="20" height="20" fill="#667eea" opacity="0.6" rx="2"/>
+    <rect x="40" y="15" width="25" height="8" fill="#667eea" opacity="0.4" rx="1"/>
+    <rect x="40" y="25" width="20" height="6" fill="#667eea" opacity="0.4" rx="1"/>
+    <text x="40" y="55" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Store A</text>
+  </g>
+  
+  <g transform="translate(150, 60)">
+    <rect x="0" y="0" width="80" height="60" fill="url(#shopGradient)" rx="8"/>
+    <rect x="10" y="10" width="60" height="30" fill="white" opacity="0.8" rx="4"/>
+    <rect x="15" y="15" width="20" height="20" fill="#764ba2" opacity="0.6" rx="2"/>
+    <rect x="40" y="15" width="25" height="8" fill="#764ba2" opacity="0.4" rx="1"/>
+    <rect x="40" y="25" width="20" height="6" fill="#764ba2" opacity="0.4" rx="1"/>
+    <text x="40" y="55" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Store B</text>
+  </g>
+  
+  <g transform="translate(250, 60)">
+    <rect x="0" y="0" width="80" height="60" fill="url(#shopGradient)" rx="8"/>
+    <rect x="10" y="10" width="60" height="30" fill="white" opacity="0.8" rx="4"/>
+    <rect x="15" y="15" width="20" height="20" fill="#fcb69f" opacity="0.6" rx="2"/>
+    <rect x="40" y="15" width="25" height="8" fill="#fcb69f" opacity="0.4" rx="1"/>
+    <rect x="40" y="25" width="20" height="6" fill="#fcb69f" opacity="0.4" rx="1"/>
+    <text x="40" y="55" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Store C</text>
+  </g>
+  
+  <!-- Shopping Cart -->
+  <g transform="translate(320, 80)">
+    <rect x="0" y="0" width="50" height="40" fill="url(#cartGradient)" rx="6"/>
+    <path d="M10 15 L15 10 L35 10 L40 15 L35 25 L15 25 Z" fill="white" opacity="0.8"/>
+    <circle cx="20" cy="35" r="3" fill="white"/>
+    <circle cx="30" cy="35" r="3" fill="white"/>
+    <text x="25" y="20" text-anchor="middle" fill="#667eea" font-size="12" font-weight="bold">3</text>
+  </g>
+  
+  <!-- Search Bar -->
+  <g transform="translate(80, 140)">
+    <rect x="0" y="0" width="200" height="30" fill="white" opacity="0.9" rx="15"/>
+    <circle cx="170" cy="15" r="8" fill="#667eea" opacity="0.8"/>
+    <path d="M165 10 L175 20 M175 10 L165 20" stroke="white" stroke-width="2"/>
+    <text x="20" y="20" fill="#667eea" font-size="12">Search products...</text>
+  </g>
+  
+  <!-- Product Grid -->
+  <g transform="translate(50, 180)">
+    <!-- Product 1 -->
+    <rect x="0" y="0" width="60" height="70" fill="white" opacity="0.9" rx="6"/>
+    <rect x="5" y="5" width="50" height="35" fill="#a8edea" opacity="0.6" rx="3"/>
+    <rect x="5" y="45" width="40" height="4" fill="#667eea" opacity="0.6" rx="2"/>
+    <rect x="5" y="52" width="30" height="3" fill="#667eea" opacity="0.4" rx="1"/>
+    <text x="30" y="65" text-anchor="middle" fill="#667eea" font-size="8" font-weight="bold">$29.99</text>
+    
+    <!-- Product 2 -->
+    <rect x="80" y="0" width="60" height="70" fill="white" opacity="0.9" rx="6"/>
+    <rect x="85" y="5" width="50" height="35" fill="#fed6e3" opacity="0.6" rx="3"/>
+    <rect x="85" y="45" width="40" height="4" fill="#764ba2" opacity="0.6" rx="2"/>
+    <rect x="85" y="52" width="30" height="3" fill="#764ba2" opacity="0.4" rx="1"/>
+    <text x="110" y="65" text-anchor="middle" fill="#764ba2" font-size="8" font-weight="bold">$49.99</text>
+    
+    <!-- Product 3 -->
+    <rect x="160" y="0" width="60" height="70" fill="white" opacity="0.9" rx="6"/>
+    <rect x="165" y="5" width="50" height="35" fill="#ffecd2" opacity="0.6" rx="3"/>
+    <rect x="165" y="45" width="40" height="4" fill="#fcb69f" opacity="0.6" rx="2"/>
+    <rect x="165" y="52" width="30" height="3" fill="#fcb69f" opacity="0.4" rx="1"/>
+    <text x="190" y="65" text-anchor="middle" fill="#fcb69f" font-size="8" font-weight="bold">$19.99</text>
+    
+    <!-- Product 4 -->
+    <rect x="240" y="0" width="60" height="70" fill="white" opacity="0.9" rx="6"/>
+    <rect x="245" y="5" width="50" height="35" fill="#667eea" opacity="0.6" rx="3"/>
+    <rect x="245" y="45" width="40" height="4" fill="#667eea" opacity="0.6" rx="2"/>
+    <rect x="245" y="52" width="30" height="3" fill="#667eea" opacity="0.4" rx="1"/>
+    <text x="270" y="65" text-anchor="middle" fill="#667eea" font-size="8" font-weight="bold">$39.99</text>
+  </g>
+  
+  <!-- Rating Stars -->
+  <g transform="translate(60, 235)">
+    <path d="M0 0 L2 4 L6 4 L3 7 L4 11 L0 9 L-4 11 L-3 7 L-6 4 L-2 4 Z" fill="#fbbf24"/>
+    <path d="M10 0 L12 4 L16 4 L13 7 L14 11 L10 9 L6 11 L7 7 L4 4 L8 4 Z" fill="#fbbf24"/>
+    <path d="M20 0 L22 4 L26 4 L23 7 L24 11 L20 9 L16 11 L17 7 L14 4 L18 4 Z" fill="#fbbf24"/>
+    <path d="M30 0 L32 4 L36 4 L33 7 L34 11 L30 9 L26 11 L27 7 L24 4 L28 4 Z" fill="#fbbf24"/>
+    <path d="M40 0 L42 4 L46 4 L43 7 L44 11 L40 9 L36 11 L37 7 L34 4 L38 4 Z" fill="#d1d5db"/>
+  </g>
+  
+  <!-- Analytics Dashboard -->
+  <g transform="translate(280, 180)">
+    <rect x="0" y="0" width="80" height="60" fill="white" opacity="0.1" rx="6"/>
+    <text x="40" y="15" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Analytics</text>
+    <polyline points="10,45 20,40 30,35 40,30 50,32 60,28 70,25" 
+              stroke="#a8edea" stroke-width="2" fill="none"/>
+    <text x="40" y="55" text-anchor="middle" fill="white" font-size="8">Sales Growth</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="200" y="285" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">E-commerce Marketplace</text>
+</svg>

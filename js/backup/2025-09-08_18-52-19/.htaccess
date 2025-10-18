@@ -1,0 +1,78 @@
+RewriteEngine On
+
+# Handle API routes
+RewriteRule ^api/services/?$ api/services.php [L,QSA]
+RewriteRule ^api/services\.php$ api/services.php [L,QSA]
+RewriteRule ^api/portfolio/?$ api/portfolio.php [L,QSA]
+RewriteRule ^api/portfolio\.php$ api/portfolio.php [L,QSA]
+RewriteRule ^api/blog/?$ api/blog.php [L,QSA]
+RewriteRule ^api/blog\.php$ api/blog.php [L,QSA]
+RewriteRule ^api/blog/recent/?$ api/blog.php [L,QSA]
+RewriteRule ^api/settings/?$ api/settings.php [L,QSA]
+RewriteRule ^api/settings\.php$ api/settings.php [L,QSA]
+RewriteRule ^api/analytics/?$ api/analytics.php [L,QSA]
+RewriteRule ^api/analytics\.php$ api/analytics.php [L,QSA]
+RewriteRule ^api/contact-info/?$ api/contact-info.php [L,QSA]
+RewriteRule ^api/contact-info\.php$ api/contact-info.php [L,QSA]
+RewriteRule ^api/contact/?$ api/contact.php [L,QSA]
+RewriteRule ^api/contact\.php$ api/contact.php [L,QSA]
+RewriteRule ^api/content/?$ api/content.php [L,QSA]
+RewriteRule ^api/content\.php$ api/content.php [L,QSA]
+RewriteRule ^api/site-content/?$ api/site-content.php [L,QSA]
+RewriteRule ^api/site-content\.php$ api/site-content.php [L,QSA]
+RewriteRule ^api/performance-monitor/?$ api/performance-monitor.php [L,QSA]
+RewriteRule ^api/performance-monitor\.php$ api/performance-monitor.php [L,QSA]
+RewriteRule ^api/clear-cache/?$ api/clear-cache.php [L,QSA]
+RewriteRule ^api/clear-cache\.php$ api/clear-cache.php [L,QSA]
+
+# Handle static files
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^(.*)$ $1 [L]
+
+# Handle all other requests - serve index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Enable compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
+# Cache static assets
+<IfModule mod_expires.c>
+    ExpiresActive on
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 week"
+    ExpiresByType image/jpg "access plus 1 week"
+    ExpiresByType image/jpeg "access plus 1 week"
+    ExpiresByType image/gif "access plus 1 week"
+    ExpiresByType image/svg+xml "access plus 1 week"
+    ExpiresByType font/woff "access plus 1 month"
+    ExpiresByType font/woff2 "access plus 1 month"
+    
+    # Portfolio resimleri için cache'i devre dışı bırak
+    <FilesMatch "portfolio/.*\.(jpg|jpeg|png|gif)$">
+        ExpiresDefault "access"
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+</IfModule>

@@ -1,0 +1,8 @@
+=== RESİM OPTİMİZASYON RAPORU ===
+
+Toplam Resim: 1
+Toplam Boyut: 10.93 KB
+Optimize Edilebilir: 1
+Optimizasyon Potansiyeli: 100%
+
+=== ÖNERİLER ===

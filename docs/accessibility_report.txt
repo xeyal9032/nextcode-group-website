@@ -1,0 +1,44 @@
+=== ERİŞİLEBİLİRLİK RAPORU ===
+
+ARIA Labels:
+  nav: Ana navigasiya menüsü
+  main: Ana məzmuna keçmək
+  footer: Saytın alt hissəsi
+  search: Axtarış
+  menu: Menyu
+  close: Bağla
+  open: Aç
+  next: Növbəti
+  previous: Əvvəlki
+  play: Oynat
+  pause: Duraklat
+  mute: Səsi kəs
+  unmute: Səsi aç
+  fullscreen: Tam ekran
+  exit-fullscreen: Tam ekrandan çıx
+  loading: Yüklənir
+  error: Xəta
+  success: Uğurlu
+  warning: Xəbərdarlıq
+  info: Məlumat
+
+Keyboard Navigation:
+  tab: Tab
+  enter: Enter
+  escape: Escape
+  arrow-up: Yuxarı ox
+  arrow-down: Aşağı ox
+  arrow-left: Sol ox
+  arrow-right: Sağ ox
+  space: Boşluq
+  home: Home
+  end: End
+  page-up: Page Up
+  page-down: Page Down
+
+Öneriler:
+  1. Tüm interaktif elementlerde ARIA labels kullanın
+  2. Keyboard navigation desteği ekleyin
+  3. Color contrast oranını kontrol edin
+  4. Screen reader testleri yapın
+  5. Focus management implementasyonu

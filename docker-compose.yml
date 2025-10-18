@@ -1,0 +1,178 @@
+version: '3.8'
+
+services:
+  # Web Application
+  web:
+    build: .
+    container_name: nextcode-web
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www/html
+      - ./logs:/var/log
+      - ./backup:/var/www/backup
+    environment:
+      - APP_ENV=production
+      - DB_HOST=mysql
+      - DB_NAME=nextcode_prod
+      - DB_USER=nextcode_user
+      - DB_PASS=secure_password_123
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - nextcode-network
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: nextcode-mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password_123
+      - MYSQL_DATABASE=nextcode_prod
+      - MYSQL_USER=nextcode_user
+      - MYSQL_PASSWORD=secure_password_123
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d
+      - ./logs/mysql:/var/log/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - nextcode-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: nextcode-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --requirepass redis_password_123
+    networks:
+      - nextcode-network
+
+  # Nginx (Alternative - if not using built-in nginx)
+  nginx:
+    image: nginx:alpine
+    container_name: nextcode-nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - web
+    networks:
+      - nextcode-network
+
+  # PHPMyAdmin (Development)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: nextcode-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=nextcode_user
+      - PMA_PASSWORD=secure_password_123
+    depends_on:
+      - mysql
+    networks:
+      - nextcode-network
+
+  # Monitoring with Prometheus
+  prometheus:
+    image: prom/prometheus
+    container_name: nextcode-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - nextcode-network
+
+  # Grafana Dashboard
+  grafana:
+    image: grafana/grafana
+    container_name: nextcode-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin_password_123
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    depends_on:
+      - prometheus
+    networks:
+      - nextcode-network
+
+  # Elasticsearch (for logging)
+  elasticsearch:
+    image: elasticsearch:8.11.0
+    container_name: nextcode-elasticsearch
+    restart: unless-stopped
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - nextcode-network
+
+  # Kibana (for log visualization)
+  kibana:
+    image: kibana:8.11.0
+    container_name: nextcode-kibana
+    restart: unless-stopped
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    networks:
+      - nextcode-network
+
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  elasticsearch_data:
+    driver: local
+
+networks:
+  nextcode-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

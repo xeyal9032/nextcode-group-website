@@ -1,0 +1,13 @@
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+<stop offset="100%" style="stop-color:#A78BFA;stop-opacity:1" />
+</linearGradient>
+</defs>
+<rect width="300" height="300" fill="url(#bg)" rx="150"/>
+<circle cx="150" cy="120" r="40" fill="#F3F4F6"/>
+<path d="M110 200C110 172.3 122.3 150 150 150S190 172.3 190 200V220H110V200Z" fill="#F3F4F6"/>
+<text x="150" y="260" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="600">Leyla Həsənova</text>
+<text x="150" y="280" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" opacity="0.8">Marketing Director</text>
+</svg>

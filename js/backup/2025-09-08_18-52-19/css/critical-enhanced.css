@@ -1,0 +1,132 @@
+/* Enhanced Critical CSS - Above the fold styles */
+/* Bu dosya mevcut critical.css'i tamamlar, override etmez */
+
+/* Font loading optimization */
+@font-face {
+    font-family: 'Inter';
+    font-display: swap;
+    src: url('../webfonts/Inter-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-display: swap;
+    src: url('../webfonts/Inter-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Preload critical resources */
+:root {
+    --critical-loading: #f3f4f6;
+    --critical-text: #1f2937;
+    --critical-primary: #3b82f6;
+    --critical-border: #e5e7eb;
+}
+
+/* Critical layout improvements */
+.hero-section {
+    contain: layout style paint;
+    will-change: transform;
+}
+
+.hero-content {
+    contain: layout style;
+}
+
+/* Critical image optimization */
+.hero-visual img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    loading: eager;
+}
+
+/* Critical button states */
+.btn-primary:focus {
+    outline: 2px solid var(--critical-primary);
+    outline-offset: 2px;
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Critical loading states */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--critical-loading);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.hero-section.loading::before {
+    opacity: 1;
+}
+
+/* Critical responsive improvements */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 80vh;
+    }
+    
+    .hero-title {
+        font-size: clamp(2rem, 5vw, 2.5rem);
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(1rem, 3vw, 1.25rem);
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        min-height: 70vh;
+    }
+    
+    .container {
+        padding: 0 12px;
+    }
+}
+
+/* Critical performance optimizations */
+.hero-section,
+.hero-content,
+.hero-title,
+.hero-subtitle,
+.btn-primary {
+    contain: layout style;
+}
+
+/* Critical animation optimizations */
+@media (prefers-reduced-motion: reduce) {
+    .hero-section,
+    .hero-content,
+    .btn-primary {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Critical print styles */
+@media print {
+    .hero-section {
+        background: white !important;
+        color: black !important;
+        min-height: auto;
+    }
+    
+    .btn-primary {
+        background: #ccc !important;
+        color: black !important;
+        border: 1px solid #999 !important;
+    }
+}

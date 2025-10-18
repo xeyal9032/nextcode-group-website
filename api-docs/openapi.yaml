@@ -1,0 +1,484 @@
+openapi: 3.0.3
+info:
+  title: NextCode Group API
+  description: |
+    NextCode Group - Digital Marketing Agency API Documentation
+    
+    Bu API, NextCode Group web uygulamasının tüm backend işlemlerini yönetir.
+    
+    ## Özellikler
+    - RESTful API tasarımı
+    - JSON response formatı
+    - CORS desteği
+    - Rate limiting
+    - Error handling
+    
+    ## Güvenlik
+    - CSRF token koruması
+    - Input validation
+    - SQL injection koruması
+    - XSS koruması
+    
+  version: 1.0.0
+  contact:
+    name: NextCode Group API Support
+    email: info@nextcode.com
+    url: https://nextcode.az
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: https://nextcode.az/api
+    description: Production server
+  - url: https://nextcodegroup.ostwind.az/api
+    description: Old production server (legacy)
+  - url: http://localhost:8000/api
+    description: Development server
+
+tags:
+  - name: Contact
+    description: İletişim formu işlemleri
+  - name: Blog
+    description: Blog yönetimi
+  - name: Portfolio
+    description: Portfolio yönetimi
+  - name: Services
+    description: Hizmet yönetimi
+  - name: Analytics
+    description: Analitik ve istatistik
+  - name: Settings
+    description: Site ayarları
+
+paths:
+  /contact.php:
+    post:
+      tags:
+        - Contact
+      summary: İletişim formu gönderimi
+      description: |
+        Kullanıcıdan gelen iletişim formunu işler ve veritabanına kaydeder.
+        Email bildirimi gönderilir.
+      operationId: submitContactForm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactRequest'
+            examples:
+              normal:
+                summary: Normal iletişim formu
+                value:
+                  name: "Əli Məmmədov"
+                  email: "ali@example.com"
+                  phone: "+994501234567"
+                  subject: "Web sitesi hakkında"
+                  message: "Merhaba, web siteniz hakkında bilgi almak istiyorum."
+      responses:
+        '200':
+          description: Başarılı işlem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactResponse'
+              examples:
+                success:
+                  value:
+                    success: true
+                    message: "Mesajınız uğurla göndərildi. Tezliklə sizinlə əlaqə saxlayacağıq."
+                    email_sent: true
+        '400':
+          description: Validation hatası
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                validation_error:
+                  value:
+                    success: false
+                    message: "Validation failed"
+                    errors:
+                      - field: "email"
+                        message: "Düzgün email ünvanı daxil edin"
+        '500':
+          description: Sunucu hatası
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /blog.php:
+    get:
+      tags:
+        - Blog
+      summary: Blog yazılarını listele
+      description: Yayınlanmış blog yazılarını getirir
+      operationId: getBlogPosts
+      parameters:
+        - name: category
+          in: query
+          description: Kategori filtresi
+          required: false
+          schema:
+            type: string
+          example: "web-development"
+        - name: limit
+          in: query
+          description: Sayfa başına gösterilecek yazı sayısı
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 100
+        - name: offset
+          in: query
+          description: Başlangıç offset
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - name: search
+          in: query
+          description: Arama sorgusu
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Başarılı işlem
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BlogPost'
+                  total:
+                    type: integer
+                  page:
+                    type: integer
+              examples:
+                success:
+                  value:
+                    success: true
+                    data:
+                      - id: 1
+                        title: "Modern Web Development Trends 2024"
+                        slug: "modern-web-development-trends-2024"
+                        excerpt: "Discover the latest trends in web development"
+                        featured_image: "https://example.com/image.jpg"
+                        category: "Web Development"
+                        published_at: "2024-01-15T10:00:00Z"
+                    total: 25
+                    page: 1
+
+  /portfolio.php:
+    get:
+      tags:
+        - Portfolio
+      summary: Portfolio projelerini listele
+      description: Yayınlanmış portfolio projelerini getirir
+      operationId: getPortfolioProjects
+      parameters:
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [get_projects, get_project]
+        - name: id
+          in: query
+          description: Proje ID (get_project action için gerekli)
+          required: false
+          schema:
+            type: integer
+        - name: category
+          in: query
+          description: Kategori filtresi
+          required: false
+          schema:
+            type: string
+        - name: featured
+          in: query
+          description: Sadece öne çıkan projeler
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Başarılı işlem
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PortfolioProject'
+        '404':
+          description: Proje bulunamadı
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /services.php:
+    get:
+      tags:
+        - Services
+      summary: Hizmetleri listele
+      description: Aktif hizmetleri getirir
+      operationId: getServices
+      parameters:
+        - name: featured
+          in: query
+          description: Sadece öne çıkan hizmetler
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Başarılı işlem
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Service'
+
+  /analytics-api.php:
+    get:
+      tags:
+        - Analytics
+      summary: Site analitikleri
+      description: Site istatistiklerini ve analitik verilerini getirir
+      operationId: getAnalytics
+      parameters:
+        - name: action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [page_views, top_pages, traffic_sources]
+        - name: period
+          in: query
+          description: Zaman aralığı
+          required: false
+          schema:
+            type: string
+            enum: [today, week, month, year]
+            default: week
+      responses:
+        '200':
+          description: Başarılı işlem
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+
+  /settings.php:
+    get:
+      tags:
+        - Settings
+      summary: Site ayarlarını getir
+      description: Public site ayarlarını getirir
+      operationId: getSettings
+      responses:
+        '200':
+          description: Başarılı işlem
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: object
+
+components:
+  schemas:
+    ContactRequest:
+      type: object
+      required:
+        - name
+        - email
+        - message
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 255
+          description: Ad soyad
+          example: "Əli Məmmədov"
+        email:
+          type: string
+          format: email
+          maxLength: 255
+          description: Email adresi
+          example: "ali@example.com"
+        phone:
+          type: string
+          maxLength: 50
+          description: Telefon numarası (opsiyonel)
+          example: "+994501234567"
+        subject:
+          type: string
+          maxLength: 255
+          description: Konu (opsiyonel)
+          example: "Web sitesi hakkında"
+        message:
+          type: string
+          minLength: 10
+          description: Mesaj içeriği
+          example: "Merhaba, web siteniz hakkında bilgi almak istiyorum."
+
+    ContactResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: İşlem başarılı mı?
+        message:
+          type: string
+          description: Kullanıcıya gösterilecek mesaj
+        email_sent:
+          type: boolean
+          description: Email gönderildi mi?
+
+    BlogPost:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Blog yazısı ID
+        title:
+          type: string
+          description: Yazı başlığı
+        slug:
+          type: string
+          description: URL slug
+        content:
+          type: string
+          description: Yazı içeriği (HTML)
+        excerpt:
+          type: string
+          description: Kısa özet
+        featured_image:
+          type: string
+          format: uri
+          description: Öne çıkan görsel URL
+        category:
+          type: string
+          description: Kategori adı
+        author:
+          type: string
+          description: Yazar adı
+        published_at:
+          type: string
+          format: date-time
+          description: Yayınlanma tarihi
+        views:
+          type: integer
+          description: Görüntülenme sayısı
+
+    PortfolioProject:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        image_url:
+          type: string
+          format: uri
+        project_url:
+          type: string
+          format: uri
+        technologies:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum: [completed, in_progress, planned]
+        is_featured:
+          type: boolean
+        views:
+          type: integer
+
+    Service:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        icon:
+          type: string
+        price:
+          type: string
+        features:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum: [active, inactive]
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          default: false
+        message:
+          type: string
+          description: Hata mesajı
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+
+  securitySchemes:
+    CsrfToken:
+      type: apiKey
+      in: header
+      name: X-CSRF-Token
+      description: CSRF token for form submissions
+
+security:
+  - CsrfToken: []
+

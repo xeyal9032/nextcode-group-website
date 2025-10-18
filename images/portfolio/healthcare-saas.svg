@@ -1,0 +1,113 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="healthGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="crossGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ee5a52;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff9a9e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fecfef;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#healthGradient)" rx="20"/>
+  
+  <!-- Medical Cross -->
+  <g transform="translate(60, 60)">
+    <circle cx="30" cy="30" r="25" fill="url(#crossGradient)"/>
+    <rect x="25" y="15" width="10" height="30" fill="white"/>
+    <rect x="15" y="25" width="30" height="10" fill="white"/>
+  </g>
+  
+  <!-- Patient Records Dashboard -->
+  <g transform="translate(150, 50)">
+    <rect x="0" y="0" width="180" height="120" fill="white" opacity="0.9" rx="8"/>
+    
+    <!-- Header -->
+    <rect x="10" y="10" width="160" height="20" fill="#667eea" opacity="0.8" rx="4"/>
+    <text x="90" y="23" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Patient Dashboard</text>
+    
+    <!-- Patient Info -->
+    <circle cx="30" cy="50" r="12" fill="#ff9a9e" opacity="0.8"/>
+    <text x="30" y="55" text-anchor="middle" fill="white" font-size="10" font-weight="bold">JS</text>
+    <rect x="50" y="40" width="80" height="4" fill="#667eea" opacity="0.6" rx="2"/>
+    <rect x="50" y="48" width="60" height="3" fill="#667eea" opacity="0.4" rx="1"/>
+    <rect x="50" y="55" width="70" height="3" fill="#667eea" opacity="0.4" rx="1"/>
+    
+    <!-- Vital Signs -->
+    <rect x="10" y="70" width="70" height="40" fill="#f8f9fa" rx="4"/>
+    <text x="45" y="83" text-anchor="middle" fill="#667eea" font-size="9" font-weight="bold">Vital Signs</text>
+    <polyline points="15,95 25,90 35,85 45,88 55,82 65,85 75,80" 
+              stroke="#ff6b6b" stroke-width="2" fill="none"/>
+    
+    <!-- Appointments -->
+    <rect x="90" y="70" width="80" height="40" fill="#f8f9fa" rx="4"/>
+    <text x="130" y="83" text-anchor="middle" fill="#667eea" font-size="9" font-weight="bold">Appointments</text>
+    <rect x="95" y="88" width="70" height="3" fill="#4ade80" rx="1"/>
+    <rect x="95" y="94" width="50" height="3" fill="#fbbf24" rx="1"/>
+    <rect x="95" y="100" width="60" height="3" fill="#f87171" rx="1"/>
+  </g>
+  
+  <!-- Telemedicine Video Call -->
+  <g transform="translate(50, 180)">
+    <rect x="0" y="0" width="120" height="80" fill="white" opacity="0.9" rx="8"/>
+    <rect x="10" y="10" width="100" height="60" fill="#1f2937" rx="4"/>
+    
+    <!-- Doctor -->
+    <circle cx="35" cy="35" r="15" fill="#fbbf24"/>
+    <circle cx="35" cy="30" r="8" fill="#f59e0b"/>
+    <rect x="30" y="45" width="10" height="15" fill="white"/>
+    
+    <!-- Patient -->
+    <circle cx="85" cy="35" r="15" fill="#ec4899"/>
+    <circle cx="85" cy="30" r="8" fill="#db2777"/>
+    <rect x="80" y="45" width="10" height="15" fill="#fecaca"/>
+    
+    <!-- Video Call UI -->
+    <rect x="15" y="55" width="20" height="8" fill="#4ade80" rx="2"/>
+    <rect x="40" y="55" width="20" height="8" fill="#f87171" rx="2"/>
+    <circle cx="95" cy="59" r="4" fill="#6b7280"/>
+  </g>
+  
+  <!-- AI Diagnosis Assistant -->
+  <g transform="translate(200, 180)">
+    <rect x="0" y="0" width="120" height="80" fill="white" opacity="0.9" rx="8"/>
+    
+    <!-- AI Brain -->
+    <circle cx="35" cy="35" r="20" fill="url(#heartGradient)"/>
+    <path d="M20 30 Q25 20 30 30 Q35 20 40 30 Q45 20 50 30 Q50 40 40 45 Q35 50 30 45 Q25 50 20 45 Q15 40 20 30" 
+          fill="white" opacity="0.8"/>
+    <circle cx="28" cy="35" r="2" fill="#667eea"/>
+    <circle cx="42" cy="35" r="2" fill="#667eea"/>
+    
+    <!-- Analysis Results -->
+    <rect x="60" y="15" width="50" height="50" fill="#f8f9fa" rx="4"/>
+    <text x="85" y="25" text-anchor="middle" fill="#667eea" font-size="8" font-weight="bold">AI Analysis</text>
+    <rect x="65" y="30" width="40" height="3" fill="#4ade80" rx="1"/>
+    <rect x="65" y="36" width="30" height="3" fill="#fbbf24" rx="1"/>
+    <rect x="65" y="42" width="35" height="3" fill="#f87171" rx="1"/>
+    <rect x="65" y="48" width="25" height="3" fill="#8b5cf6" rx="1"/>
+    <text x="85" y="58" text-anchor="middle" fill="#667eea" font-size="7">95% Accuracy</text>
+  </g>
+  
+  <!-- Data Security -->
+  <g transform="translate(340, 180)">
+    <circle cx="25" cy="25" r="20" fill="white" opacity="0.9"/>
+    <path d="M25 10 L35 15 L35 30 Q35 35 25 38 Q15 35 15 30 L15 15 Z" fill="#4ade80"/>
+    <circle cx="25" cy="25" r="5" fill="white"/>
+    <rect x="23" y="23" width="4" height="6" fill="#4ade80"/>
+    <text x="25" y="55" text-anchor="middle" fill="white" font-size="8">HIPAA</text>
+  </g>
+  
+  <!-- Connection Lines -->
+  <path d="M120 100 Q135 100 150 100" stroke="white" stroke-width="2" fill="none" opacity="0.6"/>
+  <path d="M170 170 Q185 155 200 180" stroke="white" stroke-width="2" fill="none" opacity="0.6"/>
+  
+  <!-- Title -->
+  <text x="200" y="280" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Healthcare SaaS</text>
+</svg>

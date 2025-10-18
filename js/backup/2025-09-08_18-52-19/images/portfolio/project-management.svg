@@ -1,0 +1,150 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pmGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="todoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffecd2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fcb69f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a8edea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fed6e3;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="doneGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#84fab0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8fd3f4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#pmGradient)" rx="20"/>
+  
+  <!-- Header -->
+  <g transform="translate(50, 20)">
+    <rect x="0" y="0" width="300" height="35" fill="white" opacity="0.1" rx="8"/>
+    <text x="150" y="23" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Project Management Dashboard</text>
+  </g>
+  
+  <!-- Kanban Board -->
+  <!-- To Do Column -->
+  <g transform="translate(20, 65)">
+    <rect x="0" y="0" width="90" height="200" fill="url(#todoGradient)" opacity="0.9" rx="8"/>
+    <text x="45" y="20" text-anchor="middle" fill="white" font-size="12" font-weight="bold">To Do</text>
+    <circle cx="70" cy="15" r="8" fill="white" opacity="0.3"/>
+    <text x="70" y="19" text-anchor="middle" fill="#fcb69f" font-size="10" font-weight="bold">3</text>
+    
+    <!-- Task Cards -->
+    <g transform="translate(5, 30)">
+      <rect x="0" y="0" width="80" height="35" fill="white" opacity="0.9" rx="4"/>
+      <text x="5" y="12" fill="#333" font-size="9" font-weight="bold">Design Homepage</text>
+      <text x="5" y="22" fill="#666" font-size="7">UI/UX Design</text>
+      <circle cx="70" cy="28" r="6" fill="#ef4444"/>
+      <text x="70" y="31" text-anchor="middle" fill="white" font-size="6">H</text>
+      
+      <rect x="0" y="45" width="80" height="35" fill="white" opacity="0.9" rx="4"/>
+      <text x="5" y="57" fill="#333" font-size="9" font-weight="bold">API Integration</text>
+      <text x="5" y="67" fill="#666" font-size="7">Backend</text>
+      <circle cx="70" cy="73" r="6" fill="#f59e0b"/>
+      <text x="70" y="76" text-anchor="middle" fill="white" font-size="6">M</text>
+      
+      <rect x="0" y="90" width="80" height="35" fill="white" opacity="0.9" rx="4"/>
+      <text x="5" y="102" fill="#333" font-size="9" font-weight="bold">User Testing</text>
+      <text x="5" y="112" fill="#666" font-size="7">QA</text>
+      <circle cx="70" cy="118" r="6" fill="#22c55e"/>
+      <text x="70" y="121" text-anchor="middle" fill="white" font-size="6">L</text>
+    </g>
+  </g>
+  
+  <!-- In Progress Column -->
+  <g transform="translate(120, 65)">
+    <rect x="0" y="0" width="90" height="200" fill="url(#progressGradient)" opacity="0.9" rx="8"/>
+    <text x="45" y="20" text-anchor="middle" fill="white" font-size="12" font-weight="bold">In Progress</text>
+    <circle cx="70" cy="15" r="8" fill="white" opacity="0.3"/>
+    <text x="70" y="19" text-anchor="middle" fill="#fed6e3" font-size="10" font-weight="bold">2</text>
+    
+    <!-- Task Cards -->
+    <g transform="translate(5, 30)">
+      <rect x="0" y="0" width="80" height="35" fill="white" opacity="0.9" rx="4"/>
+      <text x="5" y="12" fill="#333" font-size="9" font-weight="bold">Database Setup</text>
+      <text x="5" y="22" fill="#666" font-size="7">Backend</text>
+      <rect x="5" y="25" width="60" height="4" fill="#e5e7eb" rx="2"/>
+      <rect x="5" y="25" width="36" height="4" fill="#3b82f6" rx="2"/>
+      <text x="70" y="28" text-anchor="middle" fill="#3b82f6" font-size="6">60%</text>
+      
+      <rect x="0" y="45" width="80" height="35" fill="white" opacity="0.9" rx="4"/>
+      <text x="5" y="57" fill="#333" font-size="9" font-weight="bold">Mobile App</text>
+      <text x="5" y="67" fill="#666" font-size="7">Frontend</text>
+      <rect x="5" y="70" width="60" height="4" fill="#e5e7eb" rx="2"/>
+      <rect x="5" y="70" width="45" height="4" fill="#10b981" rx="2"/>
+      <text x="70" y="73" text-anchor="middle" fill="#10b981" font-size="6">75%</text>
+    </g>
+  </g>
+  
+  <!-- Done Column -->
+  <g transform="translate(220, 65)">
+    <rect x="0" y="0" width="90" height="200" fill="url(#doneGradient)" opacity="0.9" rx="8"/>
+    <text x="45" y="20" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Done</text>
+    <circle cx="70" cy="15" r="8" fill="white" opacity="0.3"/>
+    <text x="70" y="19" text-anchor="middle" fill="#8fd3f4" font-size="10" font-weight="bold">4</text>
+    
+    <!-- Task Cards -->
+    <g transform="translate(5, 30)">
+      <rect x="0" y="0" width="80" height="30" fill="white" opacity="0.9" rx="4"/>
+      <text x="5" y="12" fill="#333" font-size="9" font-weight="bold">Login System</text>
+      <text x="5" y="22" fill="#666" font-size="7">Authentication</text>
+      <circle cx="70" cy="15" r="6" fill="#22c55e"/>
+      <text x="70" y="18" text-anchor="middle" fill="white" font-size="8">✓</text>
+      
+      <rect x="0" y="35" width="80" height="30" fill="white" opacity="0.9" rx="4"/>
+      <text x="5" y="47" fill="#333" font-size="9" font-weight="bold">User Dashboard</text>
+      <text x="5" y="57" fill="#666" font-size="7">Frontend</text>
+      <circle cx="70" cy="50" r="6" fill="#22c55e"/>
+      <text x="70" y="53" text-anchor="middle" fill="white" font-size="8">✓</text>
+      
+      <rect x="0" y="70" width="80" height="30" fill="white" opacity="0.9" rx="4"/>
+      <text x="5" y="82" fill="#333" font-size="9" font-weight="bold">Email Service</text>
+      <text x="5" y="92" fill="#666" font-size="7">Backend</text>
+      <circle cx="70" cy="85" r="6" fill="#22c55e"/>
+      <text x="70" y="88" text-anchor="middle" fill="white" font-size="8">✓</text>
+      
+      <rect x="0" y="105" width="80" height="30" fill="white" opacity="0.9" rx="4"/>
+      <text x="5" y="117" fill="#333" font-size="9" font-weight="bold">File Upload</text>
+      <text x="5" y="127" fill="#666" font-size="7">Storage</text>
+      <circle cx="70" cy="120" r="6" fill="#22c55e"/>
+      <text x="70" y="123" text-anchor="middle" fill="white" font-size="8">✓</text>
+    </g>
+  </g>
+  
+  <!-- Team Section -->
+  <g transform="translate(320, 65)">
+    <rect x="0" y="0" width="60" height="120" fill="white" opacity="0.1" rx="8"/>
+    <text x="30" y="15" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Team</text>
+    
+    <!-- Team Members -->
+    <circle cx="15" cy="30" r="8" fill="#f59e0b"/>
+    <text x="15" y="34" text-anchor="middle" fill="white" font-size="8" font-weight="bold">JS</text>
+    
+    <circle cx="45" cy="30" r="8" fill="#ef4444"/>
+    <text x="45" y="34" text-anchor="middle" fill="white" font-size="8" font-weight="bold">AM</text>
+    
+    <circle cx="15" cy="50" r="8" fill="#8b5cf6"/>
+    <text x="15" y="54" text-anchor="middle" fill="white" font-size="8" font-weight="bold">SK</text>
+    
+    <circle cx="45" cy="50" r="8" fill="#06b6d4"/>
+    <text x="45" y="54" text-anchor="middle" fill="white" font-size="8" font-weight="bold">LM</text>
+    
+    <!-- Sprint Info -->
+    <text x="30" y="75" text-anchor="middle" fill="white" font-size="9" font-weight="bold">Sprint 3</text>
+    <text x="30" y="88" text-anchor="middle" fill="white" font-size="8">5 days left</text>
+    
+    <!-- Progress Bar -->
+    <rect x="5" y="95" width="50" height="6" fill="white" opacity="0.3" rx="3"/>
+    <rect x="5" y="95" width="35" height="6" fill="#22c55e" rx="3"/>
+    <text x="30" y="110" text-anchor="middle" fill="white" font-size="8">70% Complete</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="200" y="285" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Agile Project Management</text>
+</svg>

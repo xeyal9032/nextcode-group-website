@@ -1,0 +1,40 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://nextcode.az/sitemap.xml
+
+# Allow CSS and JS for proper rendering
+Allow: /css/
+Allow: /js/
+Allow: /assets/
+Allow: /images/
+Allow: /webfonts/
+
+# Disallow admin and sensitive areas
+Disallow: /admin/
+Disallow: /config/
+Disallow: /logs/
+Disallow: /backup/
+Disallow: /database/
+Disallow: /includes/
+Disallow: /monitoring/
+Disallow: /vendor/
+Disallow: /node_modules/
+Disallow: /temp/
+Disallow: /cache/
+
+# Allow important pages (explicitly)
+Allow: /index.php
+Allow: /about.php
+Allow: /blog.php
+Allow: /blog-post.php
+Allow: /portfolio.php
+Allow: /portfolio-detail.php
+Allow: /contact.php
+Allow: /services.php
+Allow: /pricing.php
+Allow: /faq.php
+
+# Host
+Host: https://nextcode.az

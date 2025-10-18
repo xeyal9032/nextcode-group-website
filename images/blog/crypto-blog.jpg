@@ -1,0 +1,90 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="defiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3c72;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2a5298;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="blockGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffecd2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fcb69f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="coinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd89b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#19547b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#defiGradient)" rx="20"/>
+  
+  <!-- Blockchain Blocks -->
+  <g transform="translate(50, 80)">
+    <rect x="0" y="0" width="50" height="40" fill="url(#blockGradient)" rx="8"/>
+    <rect x="5" y="5" width="40" height="6" fill="#1e3c72" opacity="0.3" rx="3"/>
+    <rect x="5" y="15" width="30" height="4" fill="#1e3c72" opacity="0.3" rx="2"/>
+    <rect x="5" y="25" width="35" height="4" fill="#1e3c72" opacity="0.3" rx="2"/>
+  </g>
+  
+  <g transform="translate(120, 80)">
+    <rect x="0" y="0" width="50" height="40" fill="url(#blockGradient)" rx="8"/>
+    <rect x="5" y="5" width="40" height="6" fill="#1e3c72" opacity="0.3" rx="3"/>
+    <rect x="5" y="15" width="30" height="4" fill="#1e3c72" opacity="0.3" rx="2"/>
+    <rect x="5" y="25" width="35" height="4" fill="#1e3c72" opacity="0.3" rx="2"/>
+  </g>
+  
+  <g transform="translate(190, 80)">
+    <rect x="0" y="0" width="50" height="40" fill="url(#blockGradient)" rx="8"/>
+    <rect x="5" y="5" width="40" height="6" fill="#1e3c72" opacity="0.3" rx="3"/>
+    <rect x="5" y="15" width="30" height="4" fill="#1e3c72" opacity="0.3" rx="2"/>
+    <rect x="5" y="25" width="35" height="4" fill="#1e3c72" opacity="0.3" rx="2"/>
+  </g>
+  
+  <!-- Chain Links -->
+  <path d="M100 100 L120 100" stroke="white" stroke-width="4" fill="none"/>
+  <path d="M170 100 L190 100" stroke="white" stroke-width="4" fill="none"/>
+  
+  <!-- Cryptocurrency Coins -->
+  <g transform="translate(280, 60)">
+    <circle cx="30" cy="30" r="25" fill="url(#coinGradient)"/>
+    <text x="30" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="bold">₿</text>
+  </g>
+  
+  <g transform="translate(320, 100)">
+    <circle cx="20" cy="20" r="18" fill="url(#coinGradient)"/>
+    <text x="20" y="25" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Ξ</text>
+  </g>
+  
+  <!-- Trading Chart -->
+  <g transform="translate(50, 160)">
+    <rect x="0" y="0" width="200" height="80" fill="white" opacity="0.1" rx="8"/>
+    <polyline points="10,60 30,40 50,50 70,30 90,35 110,20 130,25 150,15 170,20 190,10" 
+              stroke="#ffd89b" stroke-width="3" fill="none"/>
+    <circle cx="190" cy="10" r="4" fill="#ffd89b"/>
+    
+    <!-- Candlesticks -->
+    <rect x="20" y="45" width="4" height="10" fill="#4ade80"/>
+    <rect x="40" y="35" width="4" height="20" fill="#ef4444"/>
+    <rect x="60" y="40" width="4" height="15" fill="#4ade80"/>
+    <rect x="80" y="25" width="4" height="25" fill="#4ade80"/>
+    <rect x="100" y="30" width="4" height="15" fill="#ef4444"/>
+  </g>
+  
+  <!-- DeFi Icons -->
+  <g transform="translate(280, 160)">
+    <!-- Liquidity Pool -->
+    <circle cx="30" cy="20" r="15" fill="none" stroke="white" stroke-width="2" opacity="0.8"/>
+    <circle cx="30" cy="20" r="8" fill="white" opacity="0.6"/>
+    <text x="30" y="45" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">Pool</text>
+  </g>
+  
+  <!-- Yield Farming -->
+  <g transform="translate(320, 160)">
+    <path d="M15 10 L25 20 L35 10 L35 30 L15 30 Z" fill="white" opacity="0.8"/>
+    <circle cx="25" cy="15" r="3" fill="#1e3c72"/>
+    <text x="25" y="45" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">Yield</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="200" y="250" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">DeFi Trading Platform</text>
+  <text x="200" y="270" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" opacity="0.8">Decentralized Finance</text>
+</svg>

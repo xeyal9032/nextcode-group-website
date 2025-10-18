@@ -1,0 +1,159 @@
+====================================================
+NextCode Group - FTP Yükleme Listesi
+Tarih: 12 Ekim 2025
+====================================================
+
+ÖNEMLİ: Bu dosyalar sırayla yüklenmelidir!
+
+FTP Bağlantı Bilgileri:
+Host: gtorg.ftp.tools
+User: gtorg_nextcode
+Pass: JDH6h9T2zb8UC47t@rn56@
+
+====================================================
+GRUP 1: KRİTİK DÜZELTMELERİ (Önce Bunlar)
+====================================================
+
+1. ✅ contact.php
+   Konum: / (root)
+   Durum: GÜNCELLENDİ
+   Değişiklikler:
+   - FILTER_SANITIZE_STRING düzeltildi
+   - Session kontrolü eklendi
+   - first_name/last_name split
+   - XSS koruması
+   - Duplicate email düzeltildi
+   - Social media linkleri
+
+2. ✅ index.php
+   Konum: / (root)
+   Durum: GÜNCELLENDİ
+   Değişiklikler:
+   - XSS koruması (getImageTag)
+
+3. ✅ api/contact.php
+   Konum: /api/
+   Durum: GÜNCELLENDİ
+   Değişiklikler:
+   - first_name/last_name split
+   - INSERT query güncellendi
+
+4. ✅ admin/login.php
+   Konum: /admin/
+   Durum: GÜNCELLENDİ
+   Değişiklikler:
+   - Password hash log kaldırıldı
+
+====================================================
+GRUP 2: GÜVENLİK VE KALİTE İYİLEŞTİRMELERİ
+====================================================
+
+5. ✅ includes/header.php
+   Konum: /includes/
+   Durum: GÜNCELLENDİ
+   Değişiklikler:
+   - Console guard script eklendi
+
+6. ✅ includes/content_helper.php
+   Konum: /includes/
+   Durum: GÜNCELLENDİ
+   Değişiklikler:
+   - XSS koruması (getHtmlContent)
+
+7. ✅ js/console-guard.js
+   Konum: /js/
+   Durum: YENİ DOSYA
+   Açıklama:
+   - Production'da console.log disable
+   - Development'ta aktif
+
+====================================================
+GRUP 3: OTOMATIK MİGRATION SİSTEMİ (Önemli!)
+====================================================
+
+8. ✅ config/auto-migration.php
+   Konum: /config/
+   Durum: YENİ DOSYA
+   Açıklama:
+   - Otomatik veritabanı güncelleme
+   - Her 1 saatte bir kontrol
+   - Eksik sütunları otomatik ekler
+
+9. ✅ config/database.php
+   Konum: /config/
+   Durum: GÜNCELLENDİ
+   Değişiklikler:
+   - auto-migration.php entegrasyonu (satır 681-686)
+   - remember_token auto-fix kodu
+
+10. ✅ admin/database-migration.php
+    Konum: /admin/
+    Durum: YENİ DOSYA
+    Açıklama:
+    - Admin panel migration kontrol
+    - Görsel arayüz
+    - Manuel tetikleme
+
+11. ✅ cron/auto-migration.php
+    Konum: /cron/ (klasör oluştur)
+    Durum: YENİ DOSYA
+    Açıklama:
+    - Cron job için CLI script
+    - Opsiyonel (kullanmak isterseniz)
+
+====================================================
+TOPLAM: 11 DOSYA
+====================================================
+
+Yeni: 4 dosya
+Güncellenmiş: 7 dosya
+
+====================================================
+YÜKLENMESİ GEREKEN KLASÖRLER
+====================================================
+
+Eğer yoksa oluşturun:
+✓ /cron/       (cron/auto-migration.php için)
+✓ /cache/      (zaten var olmalı)
+
+====================================================
+YÜKLEME SIRASI (ÖNEMLİ!)
+====================================================
+
+1. ÖNCE GRUP 1 yükle (kritik düzeltmeler)
+2. SONRA GRUP 2 yükle (güvenlik)
+3. EN SON GRUP 3 yükle (otomatik migration)
+
+====================================================
+YÜKLEME SONRASI TEST
+====================================================
+
+1. https://nextcode.az → Aç (migration otomatik çalışacak)
+2. https://nextcode.az/admin/login.php → Giriş yap
+3. https://nextcode.az/admin/database-migration.php → Kontrol et
+4. https://nextcode.az/contact.php → Form test et
+
+====================================================
+YÜKLEME SONRASI KONTROL
+====================================================
+
+FTP'de olması gerekenler:
+□ /contact.php (güncellenmiş - tarih kontrol)
+□ /index.php (güncellenmiş)
+□ /api/contact.php (güncellenmiş)
+□ /admin/login.php (güncellenmiş)
+□ /includes/header.php (güncellenmiş)
+□ /includes/content_helper.php (güncellenmiş)
+□ /js/console-guard.js (yeni)
+□ /config/auto-migration.php (yeni)
+□ /config/database.php (güncellenmiş)
+□ /admin/database-migration.php (yeni)
+□ /cron/auto-migration.php (yeni - opsiyonel)
+
+====================================================
+NOT:
+- Tüm dosyaları yükledikten sonra test edin
+- Cache klasörü yazılabilir olmalı (chmod 755)
+- Herhangi bir hata alırsanız logs/error.log kontrol edin
+====================================================
+

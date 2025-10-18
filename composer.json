@@ -1,0 +1,63 @@
+{
+    "name": "nextcodegroup/web",
+    "description": "NextCode Group - Azərbaycan rəqəmsal marketinq agentliyi web sitesi",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "NextCode Group",
+            "email": "info@nextcodegroup.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-pdo": "*",
+        "phpmailer/phpmailer": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "squizlabs/php_codesniffer": "^3.7",
+        "phpstan/phpstan": "^1.10",
+        "enlightn/security-checker": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "NextCode\\": "src/"
+        },
+        "files": [
+            "includes/page_functions.php",
+            "includes/content_helper.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NextCode\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-html coverage/html",
+        "cs": "phpcs --standard=PSR12 --extensions=php --ignore=*/vendor/*,*/node_modules/* .",
+        "cs-fix": "phpcbf --standard=PSR12 --extensions=php --ignore=*/vendor/*,*/node_modules/* .",
+        "stan": "phpstan analyse --level=8 --no-progress",
+        "security": "security-checker security:check",
+        "quality": [
+            "@cs",
+            "@stan",
+            "@security",
+            "@test"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

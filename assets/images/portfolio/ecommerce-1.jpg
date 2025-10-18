@@ -1,0 +1,20 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grad2)"/>
+  <rect x="50" y="50" width="700" height="500" fill="white" rx="10" opacity="0.95"/>
+  <rect x="80" y="80" width="640" height="80" fill="#007bff" rx="5"/>
+  <text x="400" y="130" font-family="Arial, sans-serif" font-size="28" fill="white" text-anchor="middle" font-weight="bold">Homepage Design</text>
+  <rect x="80" y="180" width="150" height="100" fill="#f8f9fa" rx="5"/>
+  <rect x="250" y="180" width="150" height="100" fill="#f8f9fa" rx="5"/>
+  <rect x="420" y="180" width="150" height="100" fill="#f8f9fa" rx="5"/>
+  <rect x="590" y="180" width="130" height="100" fill="#f8f9fa" rx="5"/>
+  <rect x="80" y="300" width="640" height="60" fill="#e9ecef" rx="5"/>
+  <rect x="80" y="380" width="640" height="60" fill="#e9ecef" rx="5"/>
+  <rect x="80" y="460" width="640" height="60" fill="#28a745" rx="5"/>
+  <text x="400" y="500" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle" font-weight="bold">Modern & Clean Interface</text>
+</svg>

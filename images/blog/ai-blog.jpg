@@ -1,0 +1,123 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="neuralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="nodeGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffecd2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fcb69f;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff9a9e;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#fecfef;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#neuralGradient)" rx="20"/>
+  
+  <!-- Neural Network Layers -->
+  
+  <!-- Input Layer -->
+  <g transform="translate(50, 80)">
+    <text x="0" y="-10" fill="white" font-size="12" font-weight="bold">Input</text>
+    <circle cx="0" cy="20" r="12" fill="url(#nodeGradient)"/>
+    <circle cx="0" cy="50" r="12" fill="url(#nodeGradient)"/>
+    <circle cx="0" cy="80" r="12" fill="url(#nodeGradient)"/>
+    <circle cx="0" cy="110" r="12" fill="url(#nodeGradient)"/>
+  </g>
+  
+  <!-- Hidden Layer 1 -->
+  <g transform="translate(150, 60)">
+    <text x="0" y="-10" fill="white" font-size="12" font-weight="bold">Hidden 1</text>
+    <circle cx="0" cy="20" r="10" fill="url(#nodeGradient)"/>
+    <circle cx="0" cy="45" r="10" fill="url(#nodeGradient)"/>
+    <circle cx="0" cy="70" r="10" fill="url(#nodeGradient)"/>
+    <circle cx="0" cy="95" r="10" fill="url(#nodeGradient)"/>
+    <circle cx="0" cy="120" r="10" fill="url(#nodeGradient)"/>
+    <circle cx="0" cy="145" r="10" fill="url(#nodeGradient)"/>
+  </g>
+  
+  <!-- Hidden Layer 2 -->
+  <g transform="translate(250, 70)">
+    <text x="0" y="-10" fill="white" font-size="12" font-weight="bold">Hidden 2</text>
+    <circle cx="0" cy="20" r="10" fill="url(#nodeGradient)"/>
+    <circle cx="0" cy="50" r="10" fill="url(#nodeGradient)"/>
+    <circle cx="0" cy="80" r="10" fill="url(#nodeGradient)"/>
+    <circle cx="0" cy="110" r="10" fill="url(#nodeGradient)"/>
+  </g>
+  
+  <!-- Output Layer -->
+  <g transform="translate(350, 90)">
+    <text x="0" y="-10" fill="white" font-size="12" font-weight="bold">Output</text>
+    <circle cx="0" cy="20" r="12" fill="url(#nodeGradient)"/>
+    <circle cx="0" cy="60" r="12" fill="url(#nodeGradient)"/>
+  </g>
+  
+  <!-- Connections -->
+  <!-- Input to Hidden 1 -->
+  <g stroke="url(#connectionGradient)" stroke-width="2" opacity="0.6">
+    <line x1="62" y1="100" x2="140" y2="80"/>
+    <line x1="62" y1="130" x2="140" y2="105"/>
+    <line x1="62" y1="160" x2="140" y2="130"/>
+    <line x1="62" y1="190" x2="140" y2="155"/>
+    
+    <line x1="62" y1="100" x2="140" y2="105"/>
+    <line x1="62" y1="130" x2="140" y2="130"/>
+    <line x1="62" y1="160" x2="140" y2="155"/>
+  </g>
+  
+  <!-- Hidden 1 to Hidden 2 -->
+  <g stroke="url(#connectionGradient)" stroke-width="2" opacity="0.6">
+    <line x1="160" y1="80" x2="240" y2="90"/>
+    <line x1="160" y1="105" x2="240" y2="120"/>
+    <line x1="160" y1="130" x2="240" y2="150"/>
+    <line x1="160" y1="155" x2="240" y2="180"/>
+    
+    <line x1="160" y1="105" x2="240" y2="90"/>
+    <line x1="160" y1="130" x2="240" y2="120"/>
+    <line x1="160" y1="155" x2="240" y2="150"/>
+  </g>
+  
+  <!-- Hidden 2 to Output -->
+  <g stroke="url(#connectionGradient)" stroke-width="2" opacity="0.6">
+    <line x1="260" y1="90" x2="340" y2="110"/>
+    <line x1="260" y1="120" x2="340" y2="110"/>
+    <line x1="260" y1="150" x2="340" y2="150"/>
+    <line x1="260" y1="180" x2="340" y2="150"/>
+  </g>
+  
+  <!-- Activation Visualization -->
+  <g transform="translate(50, 220)">
+    <rect x="0" y="0" width="120" height="50" fill="white" opacity="0.1" rx="8"/>
+    <text x="60" y="15" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Activation Function</text>
+    
+    <!-- Sigmoid curve -->
+    <path d="M10 35 Q30 35 40 25 Q50 15 60 15 Q70 15 80 25 Q90 35 110 35" 
+          stroke="#ffecd2" stroke-width="2" fill="none"/>
+    <circle cx="60" cy="20" r="2" fill="#fcb69f"/>
+  </g>
+  
+  <!-- Training Progress -->
+  <g transform="translate(200, 220)">
+    <rect x="0" y="0" width="120" height="50" fill="white" opacity="0.1" rx="8"/>
+    <text x="60" y="15" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Training Progress</text>
+    
+    <!-- Loss curve -->
+    <path d="M10 40 L20 35 L30 30 L40 28 L50 26 L60 25 L70 24 L80 23 L90 22 L100 22 L110 22" 
+          stroke="#ff9a9e" stroke-width="2" fill="none"/>
+    <text x="60" y="45" text-anchor="middle" fill="white" font-size="8">Epoch: 100</text>
+  </g>
+  
+  <!-- Real-time Data Flow -->
+  <g transform="translate(20, 100)">
+    <circle cx="0" cy="0" r="3" fill="#ffecd2" opacity="0.8">
+      <animate attributeName="cx" values="0;320;320;0" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.8;0.8;0;0" dur="3s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Title -->
+  <text x="200" y="285" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Neural Network Visualizer</text>
+</svg>

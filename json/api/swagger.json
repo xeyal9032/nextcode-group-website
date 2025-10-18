@@ -1,0 +1,637 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "NextCode Group API",
+    "description": "Azərbaycan rəqəmsal marketinq agentliyi API dokumentasiyası",
+    "version": "1.0.0",
+    "contact": {
+      "name": "NextCode Group",
+      "email": "info@nextcodegroup.com",
+      "url": "https://nextcodegroup.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://nextcodegroup.com/api",
+      "description": "Production server"
+    },
+    {
+      "url": "http://localhost/api",
+      "description": "Development server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Blog",
+      "description": "Blog yazıları və kateqoriyalar"
+    },
+    {
+      "name": "Portfolio",
+      "description": "Portfolio layihələri və kateqoriyalar"
+    },
+    {
+      "name": "Services",
+      "description": "Xidmətlər"
+    },
+    {
+      "name": "Contact",
+      "description": "Əlaqə formu və mesajlar"
+    },
+    {
+      "name": "Content",
+      "description": "Dinamik məzmun idarəetməsi"
+    },
+    {
+      "name": "Analytics",
+      "description": "Analitika və performans məlumatları"
+    }
+  ],
+  "paths": {
+    "/blog": {
+      "get": {
+        "tags": ["Blog"],
+        "summary": "Blog yazılarını getir",
+        "description": "Bütün blog yazılarını və ya filtrlənmiş nəticələri qaytarır",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Nəticə sayı limiti",
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Kateqoriya ID-si ilə filtr",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "featured",
+            "in": "query",
+            "description": "Yalnız önəmlı yazıları göstər",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Uğurlu cavab",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlogPostsResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server xətası",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blog/{id}": {
+      "get": {
+        "tags": ["Blog"],
+        "summary": "Blog yazısı detayını getir",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Blog yazısı ID-si",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blog yazısı detayı",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BlogPostResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Blog yazısı tapılmadı"
+          }
+        }
+      }
+    },
+    "/portfolio": {
+      "get": {
+        "tags": ["Portfolio"],
+        "summary": "Portfolio layihələrini getir",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Layihə kateqoriyası",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "featured",
+            "in": "query",
+            "description": "Yalnız önəmlı layihələri göstər",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Nəticə sayı limiti",
+            "schema": {
+              "type": "integer",
+              "default": 12
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Portfolio layihələri",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortfolioResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/portfolio/{id}": {
+      "get": {
+        "tags": ["Portfolio"],
+        "summary": "Portfolio layihəsi detayını getir",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Layihə detayı",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortfolioProject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/services": {
+      "get": {
+        "tags": ["Services"],
+        "summary": "Xidmətləri getir",
+        "responses": {
+          "200": {
+            "description": "Xidmət siyahısı",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServicesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contact": {
+      "post": {
+        "tags": ["Contact"],
+        "summary": "Əlaqə formu göndər",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Mesaj uğurla göndərildi",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Yanlış məlumat",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content": {
+      "get": {
+        "tags": ["Content"],
+        "summary": "Dinamik məzmunu getir",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Məzmun açarı",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "section",
+            "in": "query",
+            "description": "Məzmun bölməsi",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Məzmun məlumatları",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/analytics": {
+      "get": {
+        "tags": ["Analytics"],
+        "summary": "Analitika məlumatlarını getir",
+        "responses": {
+          "200": {
+            "description": "Analitika məlumatları",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalyticsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BlogPost": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Blog yazısı ID-si"
+          },
+          "title": {
+            "type": "string",
+            "description": "Yazı başlığı"
+          },
+          "slug": {
+            "type": "string",
+            "description": "SEO dostu URL"
+          },
+          "content": {
+            "type": "string",
+            "description": "Yazı məzmunu"
+          },
+          "excerpt": {
+            "type": "string",
+            "description": "Yazı xülasəsi"
+          },
+          "featured_image": {
+            "type": "string",
+            "description": "Önəmlı şəkil URL-i"
+          },
+          "category_name": {
+            "type": "string",
+            "description": "Kateqoriya adı"
+          },
+          "tags": {
+            "type": "string",
+            "description": "Etiketlər"
+          },
+          "is_featured": {
+            "type": "boolean",
+            "description": "Önəmlı yazı mı"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["draft", "published", "archived"],
+            "description": "Yazı statusu"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Yaradılma tarixi"
+          },
+          "read_time": {
+            "type": "integer",
+            "description": "Oxuma müddəti (dəqiqə)"
+          }
+        }
+      },
+      "BlogPostsResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BlogPost"
+            }
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "BlogPostResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "post": {
+            "$ref": "#/components/schemas/BlogPost"
+          }
+        }
+      },
+      "PortfolioProject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "image_url": {
+            "type": "string"
+          },
+          "project_url": {
+            "type": "string"
+          },
+          "technologies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "client_name": {
+            "type": "string"
+          },
+          "project_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "featured": {
+            "type": "boolean"
+          },
+          "views": {
+            "type": "integer"
+          }
+        }
+      },
+      "PortfolioResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "projects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PortfolioProject"
+            }
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "project_count": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Service": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "is_active": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ServicesResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Service"
+            }
+          }
+        }
+      },
+      "ContactForm": {
+        "type": "object",
+        "required": ["name", "email", "subject", "message"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Ad və soyad"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "E-mail ünvanı"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Telefon nömrəsi"
+          },
+          "company": {
+            "type": "string",
+            "description": "Şirkət adı"
+          },
+          "service": {
+            "type": "string",
+            "description": "İstənilən xidmət"
+          },
+          "budget": {
+            "type": "string",
+            "description": "Büdcə aralığı"
+          },
+          "subject": {
+            "type": "string",
+            "description": "Mövzu"
+          },
+          "message": {
+            "type": "string",
+            "description": "Mesaj məzmunu"
+          }
+        }
+      },
+      "ContentResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "content": {
+            "type": "object",
+            "description": "Məzmun məlumatları"
+          }
+        }
+      },
+      "AnalyticsResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "analytics": {
+            "type": "object",
+            "properties": {
+              "page_views": {
+                "type": "integer"
+              },
+              "unique_visitors": {
+                "type": "integer"
+              },
+              "bounce_rate": {
+                "type": "number"
+              },
+              "avg_session_duration": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "SuccessResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "Əməliyyat uğurla tamamlandı"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "type": "string",
+            "example": "Xəta baş verdi"
+          },
+          "code": {
+            "type": "integer",
+            "example": 500
+          }
+        }
+      }
+    }
+  }
+}

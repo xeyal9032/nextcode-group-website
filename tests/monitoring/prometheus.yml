@@ -1,0 +1,59 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "rules/*.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+scrape_configs:
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # NextCode Web Application
+  - job_name: 'nextcode-web'
+    static_configs:
+      - targets: ['web:80']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  # MySQL Database
+  - job_name: 'mysql'
+    static_configs:
+      - targets: ['mysql:9104']
+
+  # Redis Cache
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+
+  # Nginx
+  - job_name: 'nginx'
+    static_configs:
+      - targets: ['nginx:9113']
+
+  # Node Exporter (System metrics)
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  # Application specific metrics
+  - job_name: 'nextcode-api'
+    static_configs:
+      - targets: ['web:80']
+    metrics_path: '/api/metrics'
+    scrape_interval: 5s
+
+  # Health checks
+  - job_name: 'health-checks'
+    static_configs:
+      - targets: ['web:80', 'mysql:3306', 'redis:6379']
+    metrics_path: '/health'
+    scrape_interval: 30s
