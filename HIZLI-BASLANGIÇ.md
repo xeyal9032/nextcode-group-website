@@ -2,7 +2,7 @@
 
 ## 🚀 NextCode Group - Yeni Modern Admin Paneli
 
-**Production URL:** https://nextcode.az
+**Production URL:** [REDACTED - Production URL]
 
 ---
 
@@ -12,7 +12,7 @@
 
 Tarayıcınızda açın:
 ```
-https://nextcode.az/admin/populate-content.php
+[YOUR_DOMAIN]/admin/populate-content.php
 ```
 
 Bu script otomatik olarak ekler:
